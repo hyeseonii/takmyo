@@ -4,7 +4,7 @@ body,html{
     width:100%;
     height:100%;
     /* background-color:#FAF4C0; */
-    background-color: beige;
+    background-color: #FFD9FA;
 }
 
 a{
@@ -171,124 +171,174 @@ a{
 } */
 
 
-
-
 /* content css */
 .content{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-}
-
-.content-introWrapper{
+    width:90%;
+    height:80%;
     position: absolute;
-    width: 75%;
-    height: 25%;
-    background-color: transparent;
-    right:0;
-    top:50px;
+    top:15%;
+    left:50%;
+    transform: translateX(-50%);
+    background-color:white;
 }
 
-.content-intro_text{
+.content-form{
+    width:100%;
+    height:100%;
+}
+
+.content-form-idWrapper{
+    width:100%;
+    height:15%;
+    background-color:brown;
     position: relative;
+    margin-top:10%;
+}
+
+.content-form-domainWrapper{
+    width:22%;
+    height:100%;
+    float:left;
+    background-color:aqua;
+}
+
+.content-form-domain_text{
     width:100%;
     height:auto;
+    position: relative;
+    padding-left:5px;
     top:50%;
     transform: translateY(-50%);
-    text-align:center;
+    font-size:6vw;
 }
 
-.content1{
-    background-image: url('/static/image/index_background3.png');
-    background-size: 100% 65%;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
-
-.content2{
-    background-image: url('/static/image/index2-1.png');
-    background-size: 100% 55%;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
-
-.content2-buttonWrapper{
-    width:71vw;
-    height:auto;
-    position: relative;
-    top:20%;
-    left:60%;
-    transform:translateX(-50%);
-}
-
-.content2-catsitter_button{
-    width:35vw;
-    height:13vw;
-    background-color:#FAED7D;
-    border-radius: 10px;
-    margin-right: 1vw;
-    position: relative;
+.content-form-inputWrapper{
+    width:78%;
+    height:100%;
     float:left;
-    border:none;
-    outline:none;
-    font-size:5vw;
+    background-color:orchid;
 }
 
-.content2-catee_button{
-    width:35vw;
-    height:13vw;
-    background-color:#FAED7D;
-    border-radius: 10px;
-    position: relative;
-    float:left;
-    border:none;
-    outline:none;
-    font-size:5vw;
-}
-
-
-/* index css */
-.div-index{
-    width:10%;
-    height:20vw;
-    position: fixed;
-    top: 30%;
-    right:3%;
-    background-color: transparent;
-}
-
-.div-index_1{
+.content-form-idInputWrapper{
     width:100%;
-    height:50%;
+    height:70%;
     position: relative;
-    background-color: transparent;
+    background-color: red;
+
 }
 
-.div-index_2{
+.content-form-idResulttWrapper{
     width:100%;
-    height:50%;
+    height:30%;
     position: relative;
-    background-color: transparent;
+    background-color: orange;
 }
 
-.div-index-circle{
-    width:3.5vw;
-    height:3.5vw;
+.content-form-idInput{
+    width:70%;
+    height:60%;
     position: relative;
-    border-radius: 50%;
     top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
+    transform: translateY(-50%);
+    float: left;
+    font-size:6vw;
 }
 
-#div-index-circle1{
-    background-color:black;
-    opacity:1;
+.content-form-idButton{
+    width:25%;
+    height:60%;
+    position: relative;
+    top:50%;
+    transform:translateY(-50%);
+    float:left;
+    margin-left:3%;
+    font-size:3vw;
+}
+
+.content-form-pwWrapper{
+    width:100%;
+    height:8%;
+    background-color:brown;
+    position: relative;
+    margin-top:2%;
+}
+
+.content-form-pwInput{
+    width:90%;
+    height:8vw;
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+    float: left;
+    font-size:6vw;
+}
+
+.content-form-repwWrapper{
+    width:100%;
+    height:12%;
+    background-color:brown;
+    position: relative;
+    margin-top:2%;
+}
+
+.content-form-repwInputWrapper{
+    width:100%;
+    height:60%;
+    position: relative;
+    background-color: red;
+}
+
+.content-form-repwInput{
+    width:90%;
+    height:8vw;
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+    float: left;
+    font-size:6vw;
+}
+
+.content-form-repwResultWrapper{
+    width:100%;
+    height:40%;
+    position: relative;
+    background-color: red;
+}
+
+.content-form-genderWrapper{
+    width:100%;
+    height:8%;
+    background-color:brown;
+    position: relative;
+    margin-top:2%;
+}
+
+.content-form-genderInputWrapper{
+    width:auto;
+    height: auto;
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.content-form-genderInput{
+   
+}
+
+.content-form-addressWrapper{
+    width:100%;
+    height:10%;
+    background-color:brown;
+    position: relative;
+    margin-top:2%;
+}
+
+.content-form-phoneWrapper{
+    width:100%;
+    height:8%;
+    background-color:brown;
+    position: relative;
+    margin-top:2%;
 }
 
 
-#div-index-circle2{
-    background-color:gray;
-    opacity: 0.5;
-}
