@@ -14,6 +14,8 @@
 
     <!-- import js -->
     <script src="/static/js/join.js" async></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 </head>
 <body>
      <!-- top start -->
@@ -48,7 +50,7 @@
                     </div>
                     <div class="menu-list-item-my">
                         <div class="menu-list-item_text menu-list-item_textTop">
-                            <a href="/join/">Join</a>
+                            <a href="join/">Join</a>
                         </div>
                     </div>
                     <div class="menu-list-item-my">
@@ -120,6 +122,7 @@
 
     <div class="content">
         <form class="content-form" name="frm" method="POST" action='./'>
+            {% csrf_token %}
             <div class="content-form-idWrapper">
                 <div class="content-form-domainWrapper">
                     <div class="content-form-domain_text">
@@ -132,10 +135,14 @@
                                 class="content-form-idInput" 
                                 id="idInput" 
                                 name="user_id"
+                                data-check-id-duplicate='failed'
+                                data-check-id-is-valid='failed'
                                 required>
-                        <button type="button" class="content-form-idButton">중복확인</button>
+                        <button type="button" class="content-form-idButton" onclick="check_id_duplicate();">중복확인</button>
                     </div>
                     <div class="content-form-idResultWrapper">   
+                        <div class="content-form-idResult-duplicate_text"></div>
+                        <div class="content-form-idResult-valid_text"></div>
                     </div>
                 </div>
             </div>
@@ -151,7 +158,8 @@
                             class="content-form-pwInput" 
                             id="pwInput" 
                             name="user_pw"
-                            placeholder="영문,숫자 조합 8자 이상"
+                            placeholder="영문,숫자,특수문자 조합 8자 이상"
+                            data-check-pw-valid ='failed'
                             required>
                 </div>
             </div>
@@ -167,7 +175,7 @@
                         <input type="password" 
                         class="content-form-repwInput" 
                         id="repwInput" 
-                        name="user_pw"
+                        name="user_repw"
                         required>
                     </div>
                     <div class="content-form-pwResultWrapper">
@@ -184,9 +192,9 @@
                 </div>
                 <div class="content-form-inputWrapper">
                     <div class="content-form-genderInputWrapper">
-                            <input type="radio" class="content-form-genderInput" name="gender" checked>남
+                            <input type="radio" class="content-form-genderInput" name="user_gender" checked>남
                             &nbsp;
-                            <input type="radio" class="content-form-genderInput" name="gender">여
+                            <input type="radio" class="content-form-genderInput" name="user_gender">여
                     </div>  
                 </div>
             </div>
@@ -197,6 +205,20 @@
                         addr
                     </div>
                 </div>
+                <div class="content-form-inputWrapper">
+                    <input type="text" id="sample3_postcode" placeholder="우편번호" name="user_postcode" required>
+                    <input type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"><br>
+                    <input type="text" id="sample3_address" placeholder="주소" name="user_address" required><br>
+                    <input type="text" id="sample3_detailAddress" placeholder="상세주소" name="user_detail_address"required>
+                    <input type="text" id="sample3_extraAddress" placeholder="참고항목" name="user_extra_address">
+                </div>
+            </div>
+            <div id="wrap">
+                <img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+                    id="btnFoldWrap"
+                    style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
+                    onclick="foldDaumPostcode()"
+                    alt="접기버튼">
             </div>
 
             <div class="content-form-phoneWrapper">
@@ -214,7 +236,17 @@
                         required>
                 </div>
             </div>
-    
+            <div class="content-form-checkPhoneWrapper">
+                <div class="content-form-checkPhone_text">
+                    핸드폰 번호를 공개하시면<br>
+                    더 빠른 펫시터 매칭이 진행될 수 있습니다.
+                </div>
+                <input type="checkbox" class="content-form-checkPhone_checkbox" value="checked">공개 동의
+            </div>
+
+            <button type="submit" class="content-form-submitButton">
+                등록하기
+            </button>
 
         </form>
     </div>

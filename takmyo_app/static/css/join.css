@@ -234,6 +234,13 @@ a{
     background-color: orange;
 }
 
+.content-form-idResultWrapper{
+    width:100%;
+    height:30%;
+    position: relative;
+    background-color:chocolate;
+}
+
 .content-form-idInput{
     width:70%;
     height:60%;
@@ -270,7 +277,7 @@ a{
     top:50%;
     transform: translateY(-50%);
     float: left;
-    font-size:6vw;
+    font-size:4vw;
 }
 
 .content-form-repwWrapper{
@@ -327,7 +334,7 @@ a{
 
 .content-form-addressWrapper{
     width:100%;
-    height:10%;
+    height:20%;
     background-color:brown;
     position: relative;
     margin-top:2%;
@@ -341,4 +348,71 @@ a{
     margin-top:2%;
 }
 
+.content-form-checkPhoneWrapper{
+    width:100%;
+    height:15%;
+    position: relative;
+    margin-top:2%;
+    background-color:brown;
+    text-align:center;
+}
+
+.content-form-checkPhone_text{
+    width:100%;
+    height:auto;
+    text-align: center;
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:2%;
+}
+
+.content-form-checkPhone_checkbox{
+    width:5vw;
+    height:5vw;
+    position: relative;
+    vertical-align: top;
+}
+
+.content-form-submitButton{
+    width:40vw;
+    height: 10vw;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    margin-top:5%;
+    margin-bottom: 5%;
+}
+
+/* 주소 api */
+#sample3_postcode{
+    width: 30vw;
+    height: 5vw;
+}
+#sample3_address{
+    height: 5vw;
+}
+
+#sample3_detailAddress{
+    height: 5vw;
+}
+
+#sample3_extraAddress{
+    height: 5vw;
+}
+
+#wrap{
+    display:none;
+    border:1px solid;
+    width: 100%;
+    height: 50vw;
+    margin:5px 0;
+    position:relative;
+} 
+
+@media(min-device-width : 600px){
+    *{
+
+        display: none;
+    }
+}
 
