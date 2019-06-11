@@ -226,8 +226,8 @@ function sample3_execDaumPostcode() {
             }
 
             //우편번호와 주소 정보를 해당 필드에 넣는다.
-            data.getElementById('sample3_postcode').value = data.zonecode;
-            data.getElementById('sample3_address').value = addr;
+            document.getElementById('sample3_postcode').value = data.zonecode;
+            document.getElementById('sample3_address').value = addr;
             //커서를 상세주소 필드로 이동한다.
             document.getElementById('sample3_detailAddress').foucus();
 
