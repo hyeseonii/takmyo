@@ -60,19 +60,19 @@ var position = $(window).scrollTop();
 $(document).ready(function(){
     $(document)
     .on("mousedown", function(event){
-        console.log(event.pageX);
+        // console.log(event.pageX);
     })
 
 
 
     .mousemove(function(event){
-        console.log(event.pageX);
+        // console.log(event.pageX);
     })
 
 
 
     .on("mouseup", function(){
-        console.log(event.pageX);
+        // console.log(event.pageX);
     });
     // $('html, body')
     //     .animate({

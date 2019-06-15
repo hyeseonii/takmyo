@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- import js -->
-    <script src="/static/js/join.js" async></script>
+    <script src="/static/js/login.js" async></script>
 
 </head>
 <body>
@@ -128,10 +128,10 @@
         <div class="content-loginWrapper">
             <div class="cotent-loginInputWrapper">
                 <input type="text" class="content-loginInput" id="idInput" name="user_id" placeholder=" ID">
-                <input type="pasword" class="content-loginInput" id="pwInput" name="user_pw" placeholder=" PASSWORD">    
+                <input type="password" class="content-loginInput" id="pwInput" name="user_pw" placeholder=" PASSWORD">    
             </div>
 
-            <button type="button" class="content-loginButton" id="loginButton">로그인</button>
+            <button type="button" class="content-loginButton" id="loginButton" onclick="login();">로그인</button>
         </div>
         <div class="content-etcWrapper">
             <div class="content-etc_text">

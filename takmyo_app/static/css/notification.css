@@ -234,125 +234,129 @@ a{
     background-color: blueviolet;
 } */
 
-
-
-
 /* content css */
 .content{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-}
-
-.content-introWrapper{
     position: absolute;
-    width: 75%;
-    height: 25%;
-    background-color: transparent;
-    right:0;
-    top:50px;
+    width:100%;
+    height:90%;
+    bottom:0;
+    background-color:purple;
 }
 
-.content-intro_text{
+.content-deleteWrapper{
     position: relative;
     width:100%;
-    height:auto;
+    height:10%;
+    background-color:skyblue;
+}
+
+.content-delete_bar{
+    position: absolute;
+    width:2px;
+    height:5vw;
     top:50%;
+    right:23.6%;
+    transform:translateY(-50%);
+    background-color:gray;
+    opacity: 0.5;
+}
+
+.content-delete_button{
+    position: absolute;
+    width:auto;
+    height:10vw;
+    background-color:transparent;
+    border:none;
+    outline:none;
+}
+
+#delete_checked_notification_button{
+    top:50%;
+    right:25%;
     transform: translateY(-50%);
-    text-align:center;
 }
 
-.content1{
-    background-image: url('/static/image/index_background3.png');
-    background-size: 100% 65%;
-    background-repeat: no-repeat;
-    background-position: bottom;
+#delete_all_notification_button{
+    top:50%;
+    right:5%;
+    transform: translateY(-50%);
 }
 
-.content2{
-    background-image: url('/static/image/index2-1.png');
-    background-size: 100% 55%;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
-
-.content2-buttonWrapper{
-    width:71vw;
-    height:auto;
+.content-notificationWrapper{
     position: relative;
-    top:20%;
-    left:60%;
-    transform:translateX(-50%);
+    width:100%;
+    height:90%;
+    background-color:pink;
+    overflow-y:scroll;
 }
 
-.content2-catsitter_button{
-    width:35vw;
-    height:13vw;
-    background-color:#FAED7D;
-    border-radius: 10px;
-    margin-right: 1vw;
+.content-notification{
+    position: relative;
+    width:100%;
+    height:13%;
+    background-color:transparent;
+    border-bottom:1px solid gray;
+}
+
+.checked_notification{
+    color:gray;
+}
+
+.content-notification-imageWrapper{
+    width:20%;
+    height:100%;
     position: relative;
     float:left;
-    border:none;
-    outline:none;
-    font-size:5vw;
+    background-color:violet;
 }
 
-.content2-catee_button{
-    width:35vw;
-    height:13vw;
-    background-color:#FAED7D;
-    border-radius: 10px;
+.content-notification_image{
+    width:10vw;
+    height:10vw;
     position: relative;
-    float:left;
-    border:none;
-    outline:none;
-    font-size:5vw;
-}
-
-
-/* index css */
-.div-index{
-    width:10%;
-    height:20vw;
-    position: fixed;
-    top: 30%;
-    right:3%;
-    background-color: transparent;
-}
-
-.div-index_1{
-    width:100%;
-    height:50%;
-    position: relative;
-    background-color: transparent;
-}
-
-.div-index_2{
-    width:100%;
-    height:50%;
-    position: relative;
-    background-color: transparent;
-}
-
-.div-index-circle{
-    width:3.5vw;
-    height:3.5vw;
-    position: relative;
-    border-radius: 50%;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
 }
 
-#div-index-circle1{
-    background-color:black;
-    opacity:1;
+.content-notification-contentWrapper{
+    width:80%;
+    height:100%;
+    position: relative;
+    float:left;
+    background-color:aqua;
+}
+
+.content-notification-content-textWrapper{
+    width:100%;
+    height:70%;
+    position: relative;
+    background-color: brown;
+}
+
+.content-notification-content_text{
+    width:95%;
+    height:auto;
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+    margin-left:5%;
+}
+
+.content-notification-content-createdWrapper{
+    width:100%;
+    height: 30%;
+    position: relative;
+    background-color: orange;
+}
+
+.content-notification-content_created{
+    width:100%;
+    height:auto;
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+    text-align:right;
 }
 
 
-#div-index-circle2{
-    background-color:gray;
-    opacity: 0.5;
-}

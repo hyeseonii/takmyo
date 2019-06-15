@@ -4,11 +4,27 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from .models import *
 
 # Create your views here.
 def index(request) :
+
+    user = request.user
+
+    if user.is_authenticated :
+
+        notifications_count = user.receive_notifications.filter(is_checked=False).count()
+
+        print(notifications_count)
+
+        context = {'user' : user, 'notifications_count' : notifications_count}
+
+        return render(request, 'takmyo_app/index.html', context)
+        
+    elif user.is_anonymous:
     
-    return render(request, 'takmyo_app/index.html')
+        return render(request, 'takmyo_app/index.html')
+
 
 def join(request) :
 
@@ -57,9 +73,31 @@ def join(request) :
         return redirect('/login/')
 
 
+@csrf_exempt
 def my_login(request) :
 
-    return render(request, 'takmyo_app/login.html')
+    if request.method == 'GET' :
+
+        return render(request, 'takmyo_app/login.html')
+    
+    elif request.method =='POST' :
+
+        print("!!!!!!")
+
+        user_id = request.POST['user_id']
+        user_pw = request.POST['user_pw']
+
+        user = authenticate(username = user_id, password = user_pw)
+
+        if user is not None :
+            login(request, user)
+            result = {"result":"success"}
+        
+        else :
+
+            result ={"result":"failed"}
+        
+        return JsonResponse(result)
 
 
 @csrf_exempt
@@ -81,3 +119,63 @@ def check_id_duplicate(request,user_id) :
     return JsonResponse(result)
 
    
+
+def notification(request) :
+    
+    user = request.user
+
+    if user.is_authenticated:
+    
+        notifications = user.receive_notifications.all()
+
+        context = {'user': user, 'notifications': notifications}
+
+        return render(request, 'takmyo_app/notification.html',context)
+
+    else :
+
+        return redirect('/login/')
+
+
+def delete_checked_notification(request) :
+
+    user = request.user
+
+    try :
+        checked_notification = user.receive_notifications.filter(is_checked=True).delete()
+        result = {'result' : 'success'}
+    
+    except:
+        result = {'result' : 'failed'}
+    
+    return JsonResponse(result)
+
+
+def delete_all_notification(request) :
+
+    user = request.user
+
+    try : 
+        all_notification = user.receive_notifications.all().delete()
+        result = {'result':'success'}
+
+    except :
+        result = {'result':'failed'}
+    
+    return JsonResponse(result)
+    
+
+def check_notification(request, noti_id) :
+
+    user = request.user
+
+    try:
+        checked_notification = Notification.objects.get(id=noti_id, receiver=user)
+        checked_notification.is_checked = True
+        checked_notification.save()
+        result = {'result':'success'}
+
+    except:
+        result ={'result':'failed'}
+    
+    return JsonResponse(result)
