@@ -57,3 +57,7 @@ const check_notification = (noti) => {
     console.log(noti_id);
 }
 
+const go_notification = () =>{
+    console.log("!!!");
+    window.location.href = "/notification/";
+}

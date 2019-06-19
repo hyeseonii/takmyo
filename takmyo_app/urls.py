@@ -15,6 +15,11 @@ urlpatterns = [
     path('notification/delete/checked/',views.delete_checked_notification),
     path('notification/delete/all/',views.delete_all_notification),
     path('notification/check/<int:noti_id>/',views.check_notification),
-    
+
+    path('catsitter_mode/',views.catsitter_mode),
+
+    path('mypage/',views.mypage),
+    path('modify_myinfo/', views.modify_myinfo),
+    path('modify_myinfo/check_current_pw/',views.check_current_pw),    
 
 ]

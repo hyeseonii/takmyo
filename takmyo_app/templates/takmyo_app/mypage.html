@@ -7,14 +7,13 @@
     <title>Document</title>
 
     <!-- import css-->
-    <link rel="stylesheet" href ="/static/css/index.css">
+    <link rel="stylesheet" href ="/static/css/mypage.css">
 
     <!-- import jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+  
     <!-- import js -->
-    <script src="/static/js/index.js" async></script>
-
+    <script src="/static/js/mypage.js" async></script>
 </head>
 <body>
     <!-- top start -->
@@ -32,9 +31,9 @@
             </div>
             {% endif %}
         </div>
-    </div>
+        </div>
     <!-- top end -->
-
+    
     <!-- menu start -->
     <div class="menu">
         <div class="menu-notificationWrapper" >
@@ -59,7 +58,6 @@
                 <br>
                 <font>{{user.username}}</font>
             {% endif %}
-
         </div>
         <div class="menu-listWrapper">
             <div class="menu-list-itemWrapper">
@@ -156,39 +154,35 @@
     <!-- menu end -->
 
     <!-- content start -->
-    <div class="content content1">
-        <img class="content_logo_icon" src="">
-        <div class="content-introWrapper">
-            <div class="content-intro_text">
-                안녕하세요<br>
-                고양이고양이고양이
+    <div class="content">
+        <div class="content-titleWrapper">
+            <div class="content-title_text">
+                <strong>비밀번호 확인</strong>
+                <br>
+                회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 입력해주세요. 
             </div>
         </div>
-    </div>
+        <div class="content-loginWrapper">
+            <div class="cotent-loginInputWrapper">
+                <input type="text" 
+                        class="content-loginInput" 
+                        id="idInput" 
+                        name="user_id" 
+                        placeholder=" ID"
+                        value="{{user.username}}"
+                        disabled='true'
+                >
+                <input type="password" 
+                        class="content-loginInput" 
+                        id="pwInput" 
+                        name="user_pw" 
+                        placeholder=" PASSWORD"
+                >    
+            </div>
 
-    <div class="content content2">
-        <div class="content2-buttonWrapper">
-            <button class="content2-catsitter_button">Catsitter</button>
-            <button class="content2-catee_button">Catee</button>
+            <button type="button" class="content-loginButton" id="loginButton" onclick="login();">확인</button>
         </div>
     </div>
-
     <!-- content end -->
-
-    <!-- index end -->
-    <div class="div-index">
-        <div class="div-index_1">
-            <div class="div-index-circle" id="div-index-circle1">
-
-            </div>
-        </div>
-        <div class="div-index_2">
-            <div class="div-index-circle" id="div-index-circle2">
-                
-            </div>
-        </div>
-    </div>
-    <!-- index end -->
-
 </body>
 </html>

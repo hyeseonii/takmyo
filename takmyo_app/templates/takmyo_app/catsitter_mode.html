@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- import css-->
+     <link rel="stylesheet" href ="/static/css/catsitter_mode.css">
+
+    <!-- import jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+    <!-- import js -->
+     <script src="/static/js/catsitter_mode.js" async></script>
+</head>
+<body>
+    <!-- top start -->
+    <div class="top">
+        <div class="top-menuWrapper">
+            <img class="top-menu_icon" 
+                src="/static/image/menu.png"
+                onclick="open_menu()"
+            >
+            {% if notifications_count > 0 %}
+            <div class="menu-notification_count">
+                <div class="menu-notification_countText">
+                    {{notifications_count}}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    <!-- top end -->
+    
+    <!-- menu start -->
+    <div class="menu">
+        <div class="menu-notificationWrapper" >
+            <a href="/notification/">
+                <img src="/static/image/noti.png" class="menu-notification_image">
+                {% if notifications_count > 0 %}
+                <div class="menu-notification_count">
+                    <div class="menu-notification_countText">
+                        {{notifications_count}}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="menu-profileWrapper">
+            {% if not user.is_authenticated %}
+                <img src="/static/image/unknown.png" class="menu-profile_image">
+                <br>
+                <font></font>
+            {% else %}
+                <!-- <img src="user.profile_image.url" class="menu-profile_image"> -->
+                <img src="/static/image/unknown.png" class="menu-profile_image">
+                <br>
+                <font>{{user.username}}</font>
+            {% endif %}
+        </div>
+        <div class="menu-listWrapper">
+            <div class="menu-list-itemWrapper">
+                <div class="menu-list-item-myWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                                MY
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/login/">Login</a> 
+                        </div>
+                    </div>
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/join/">Join</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/mypage/">Mypage</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-list-item-categoryWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            CATEGORY
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/main/">Home</a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/aboutus/">About us</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catsitter_search/">Catsitter search</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catsitter_mode/">Catsitter mode</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catee_mode/">Catee mode</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-list-item-contactWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            CONTACT
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            hhs19962002@naver.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-aboutWrapper">
+
+        </div>
+        <div class="menu-closeWrapper">
+            <img class="menu-close_icon"
+                src="/static/image/close.png"
+                onclick="close_menu()"
+            >
+        </div>
+    </div>
+    <!-- menu end -->
+
+    <!-- content start -->
+    <div class="content">
+        <div class="content-myinfoWrapper">
+            <div class="content-myinfo-topWrapper">
+                <div class="content-myinfo-top-profileWrapper">
+                    <div class="content-myinfo-top-profile-imageWrapper">
+                        <img class="content-myinfo-top-profile_image" src="/static/image/unknown.png">
+                    </div>
+                    <div class="content-myinfo-top-profile-textWrapper">
+                        <div class="content-myinfo-top-profile_text">
+                            한혜선
+                            <br>
+                            <button>펫시터 정보수정</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-myinfo-top-formWrapper">
+                    <div class="content-myinfo-top-form-item">
+                        <div class="content-myinfo-top-form-item-iconWrapper">  
+                            <!-- <img class="content-myinfo-top-form-item_icon" src="/static/image/form_icon.png"> -->
+                            <div class="content-myinfo-top-form-item_text">
+                                받은<br>
+                                신청서
+                            </div>
+                        </div>
+                        <div class="content-myinfo-top-form-item-countWrapper">
+                            <div class="content-myinfo-top-form-item_text">
+                                - 건
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="content-myinfo-top-form-item">
+                        <div class="content-myinfo-top-form-item-iconWrapper">  
+                            <!-- <img class="content-myinfo-top-form-item_icon" src="/static/image/form_icon.png"> -->
+                            <div class="content-myinfo-top-form-item_text">
+                                보낸<br>
+                                신청서
+                            </div>
+                        </div>
+                        <div class="content-myinfo-top-form-item-countWrapper">
+                            <div class="content-myinfo-top-form-item_text">
+                                - 건
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="content-myinfo-top-form-item">
+                        <div class="content-myinfo-top-form-item-iconWrapper">  
+                            <!-- <img class="content-myinfo-top-form-item_icon" src="/static/image/form_icon.png"> -->
+                            <div class="content-myinfo-top-form-item_text">
+                                리뷰
+                            </div>
+                        </div>
+                        <div class="content-myinfo-top-form-item-countWrapper">
+                            <div class="content-myinfo-top-form-item_text">
+                                - 건
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="content-myinfo-bottomWrapper">
+                <div class="content-myinfo-bottom-itemWrapper">
+                    <div class="content-myinfo-bottom-item-categoryWrapper">
+                        <div class="content-myinfo-bottom-item_text">
+                            핸드폰
+                        </div>
+                    </div>
+                    <div class="content-myinfo-bottom-item-textWrapper">
+                        <div class="content-myinfo-bottom-item_text">
+                            010-8923-4653
+                        </div>
+                    </div>
+                </div>
+                <div class="content-myinfo-bottom-itemWrapper">
+                    <div class="content-myinfo-bottom-item-categoryWrapper">
+                        <div class="content-myinfo-bottom-item_text">
+                            주소
+                        </div>
+                    </div>
+                    <div class="content-myinfo-bottom-item-textWrapper">
+                        <div class="content-myinfo-bottom-item_text">
+                            서울 강북구 수유동 50-54 201호
+                        </div>
+                    </div>
+                </div>
+                <div class="content-myinfo-bottom-itemWrapper">
+                    <div class="content-myinfo-bottom-item-categoryWrapper">
+                        <div class="content-myinfo-bottom-item_text">
+                            펫시터 활성화
+                        </div>
+                    </div>
+                    <div class="content-myinfo-bottom-item-textWrapper">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-listWrapper">
+            <div class="content-list-selectWrapper">
+                <div class="content-list-select-item" id="select_receive_form" onclick="select_receive_form()">
+                    <div class="content-list-select-item_text">
+                        받은 신청서(-)
+                    </div>
+                </div>
+                <div class="content-list-select-item" id="select_send_form" onclick="select_send_form()">
+                    <div class="content-list-select-item_text">
+                        보낸 신청서(-)
+                    </div>
+                </div>
+            </div>
+            <div class="content-list" id="receive_form_list">
+                <div class="content-list-item">
+                    받은 신청서1
+                </div>
+                <div class="content-list-item">
+                    받은 신청서2
+                </div>
+            </div>
+            <div class="content-list" id="send_form_list">
+                <div class="content-list-item">
+                    받은 신청서1
+                </div>
+                <div class="content-list-item">
+                    받은 신청서2
+                </div>
+            </div>
+        </div>
+        <div class="content-listWrapper">
+            <div class="content-list-selectWrapper">
+                <div class="content-list-select-review">
+                    <div class="content-list-select-item_text">
+                        리뷰(-)
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-list">
+                <div class="content-list-item">
+                    리뷰1
+                </div>
+                <div class="content-list-item">
+                    리뷰2
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content end -->
+</body>
+
+</html>

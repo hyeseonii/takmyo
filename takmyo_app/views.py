@@ -179,3 +179,52 @@ def check_notification(request, noti_id) :
         result ={'result':'failed'}
     
     return JsonResponse(result)
+
+
+def catsitter_mode(request) :
+
+    return render(request,'takmyo_app/catsitter_mode.html')
+
+
+@csrf_exempt 
+def check_current_pw(request) :
+
+    user = request.user
+
+    current_pw_input = request.POST['current_pw_input']
+
+    valid_user = authenticate(username = user.username,password = current_pw_input)
+
+    if valid_user is not None :
+        result = {"result" : "success"}
+    else :
+        result = {"result" : "failed"}
+
+    return JsonResponse(result)
+
+def mypage(request) :
+
+    user = request.user
+
+    # 비밀번호 재입력 화면 호출시 로그인 되어 있으면 -> mypage.html로 정상적 이동
+    if user.is_authenticated :
+
+        context = {'user':user}
+
+        return render(request,'takmyo_app/mypage.html',context)
+
+    else :
+        
+        return redirect('/login/')
+
+
+def modify_myinfo(request) :
+
+    return render(request,'takmyo_app/modify_myinfo.html')
+
+
+def my_logout(request) :
+
+    logout(request)
+
+    return redirect('/main/')

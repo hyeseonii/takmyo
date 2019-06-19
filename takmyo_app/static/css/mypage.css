@@ -235,125 +235,70 @@ a{
     background-color: blueviolet;
 } */
 
-
-
-
 /* content css */
-.content{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-}
-
-.content-introWrapper{
+.content {
+    width:90%;
+    height:85vw;
     position: absolute;
-    width: 75%;
-    height: 25%;
-    background-color: transparent;
-    right:0;
-    top:50px;
-}
-
-.content-intro_text{
-    position: relative;
-    width:100%;
-    height:auto;
-    top:50%;
-    transform: translateY(-50%);
-    text-align:center;
-}
-
-.content1{
-    background-image: url('/static/image/index_background3.png');
-    background-size: 100% 65%;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
-
-.content2{
-    background-image: url('/static/image/index2-1.png');
-    background-size: 100% 55%;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
-
-.content2-buttonWrapper{
-    width:71vw;
-    height:auto;
-    position: relative;
-    top:20%;
-    left:60%;
-    transform:translateX(-50%);
-}
-
-.content2-catsitter_button{
-    width:35vw;
-    height:13vw;
-    background-color:#FAED7D;
-    border-radius: 10px;
-    margin-right: 1vw;
-    position: relative;
-    float:left;
-    border:none;
-    outline:none;
-    font-size:5vw;
-}
-
-.content2-catee_button{
-    width:35vw;
-    height:13vw;
-    background-color:#FAED7D;
-    border-radius: 10px;
-    position: relative;
-    float:left;
-    border:none;
-    outline:none;
-    font-size:5vw;
-}
-
-
-/* index css */
-.div-index{
-    width:10%;
-    height:20vw;
-    position: fixed;
-    top: 30%;
-    right:3%;
-    background-color: transparent;
-}
-
-.div-index_1{
-    width:100%;
-    height:50%;
-    position: relative;
-    background-color: transparent;
-}
-
-.div-index_2{
-    width:100%;
-    height:50%;
-    position: relative;
-    background-color: transparent;
-}
-
-.div-index-circle{
-    width:3.5vw;
-    height:3.5vw;
-    position: relative;
-    border-radius: 50%;
     top:50%;
     left:50%;
-    transform: translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    background-color:white;
 }
 
-#div-index-circle1{
-    background-color:black;
-    opacity:1;
+.content-titleWrapper{
+    width:100%;
+    height:20%;
+    position: relative;
+    top:5%;
+    background-color:skyblue;
 }
 
+.content-title_text{
+    width:100%;
+    height:auto;
+    text-align:left;
+    position: relative;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:14px;
+}
 
-#div-index-circle2{
-    background-color:gray;
-    opacity: 0.5;
+.content-loginWrapper{
+    width:100%;
+    height:55%;
+    position: relative;
+    top:10%;
+    background-color: brown;
+}
+
+.cotent-loginInputWrapper{
+    width:100%;
+    height:65%;
+    position: relative;
+    text-align: center;
+    left:50%;
+    transform:translateX(-50%);
+    background-color:skyblue;
+}
+
+.content-loginInput{
+    width:95%;
+    height:35%;
+    position: relative;
+    margin-bottom:4%;
+    z-index:1000;
+    border:1px solid gray;
+}
+
+.content-loginButton{
+    width:95%;
+    height: 25%;
+    position: absolute;
+    bottom: 0;
+    left:50%;
+    transform: translateX(-50%);
+    border:none;
+    background-color:palevioletred;
+    font-size:4vw;
 }

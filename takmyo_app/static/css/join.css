@@ -174,7 +174,7 @@ a{
 /* content css */
 .content{
     width:90%;
-    height:80%;
+    height:150vw;
     position: absolute;
     top:15%;
     left:50%;
@@ -242,7 +242,7 @@ a{
 }
 
 .content-form-idInput{
-    width:70%;
+    width:50%;
     height:60%;
     position: relative;
     top:50%;
@@ -258,7 +258,7 @@ a{
     top:50%;
     transform:translateY(-50%);
     float:left;
-    margin-left:3%;
+    margin-left:2%;
     font-size:3vw;
 }
 
