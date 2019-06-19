@@ -20,6 +20,6 @@ urlpatterns = [
 
     path('mypage/',views.mypage),
     path('modify_myinfo/', views.modify_myinfo),
-    path('modify_myinfo/check_current_pw/',views.check_current_pw),    
+    path('modify_myinfo/check_current_pw/', views.check_current_pw),    
 
 ]

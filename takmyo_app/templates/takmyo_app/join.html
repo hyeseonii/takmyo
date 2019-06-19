@@ -14,10 +14,6 @@
 
 </head>
 <body>
-    <!-- import js -->
-    <script src="/static/js/join.js" async></script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    
      <!-- top start -->
      <div class="top">
         <div class="top-menuWrapper">
@@ -193,9 +189,9 @@
                 </div>
                 <div class="content-form-inputWrapper">
                     <div class="content-form-genderInputWrapper">
-                            <input type="radio" class="content-form-genderInput" name="user_gender" checked>남
+                            <input type="radio" class="content-form-genderInput" name="user_gender" value="남" checked>남
                             &nbsp;
-                            <input type="radio" class="content-form-genderInput" name="user_gender">여
+                            <input type="radio" class="content-form-genderInput" name="user_gender" value="여">여
                     </div>  
                 </div>
             </div>
@@ -252,5 +248,9 @@
         </form>
     </div>
     <!-- content end -->
+
+    <!-- import js -->
+    <script src="/static/js/join.js" async></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </body>
 </html>

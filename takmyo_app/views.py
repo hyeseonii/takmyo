@@ -38,6 +38,7 @@ def join(request) :
         user_id = request.POST['user_id']
         user_pw = request.POST['user_pw']
         user_gender = request.POST['user_gender']
+        user_postcode = request.POST['user_postcode']
         user_address = request.POST['user_address']
         user_detail_address = request.POST['user_detail_address']
         user_extra_address = request.POST.get('user_extra_address','')
@@ -61,7 +62,9 @@ def join(request) :
         new_user = User.objects.create_user(
             username = user_id,
             password = user_pw,
+            gender = user_gender,
             address = user_address,
+            postcode = user_postcode,
             detail_address = user_detail_address,
             extra_address = user_extra_address,
             phone = user_phone,
@@ -201,6 +204,7 @@ def check_current_pw(request) :
         result = {"result" : "failed"}
 
     return JsonResponse(result)
+
 
 def mypage(request) :
 
