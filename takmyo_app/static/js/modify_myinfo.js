@@ -67,7 +67,7 @@ const check_submit_is_valid = () =>{
 
 // 현재 비밀번호 입력 -> db에 가입할 때 입력했던 비밀번호와 일치하는지 확인
 $("#current_pwInput").change(function(){
-    const current_pw_input = $("#current_pw_input").val();
+    const current_pw_input = $("#current_pwInput").val();
     console.log(current_pw_input);
 
     // 함수가 호출될때마다(사용자 한명이 입력할때마다) 객체가 생성

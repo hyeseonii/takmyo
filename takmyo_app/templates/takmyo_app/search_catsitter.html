@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- import css -->
+    <link rel="stylesheet" href="/static/css/search_catsitter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- import jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <!-- top start -->
+    <div class="top">
+        <div class="top-menuWrapper">
+            <img class="top-menu_icon" 
+                src="/static/image/menu.png"
+                onclick="open_menu();"
+                >
+
+            {% if notifications_count > 0 %}
+            <div class="menu-notification_count">
+                <div class="menu-notification_countText">
+                    {{notifications_count}}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- top end -->
+
+    <!-- menu start -->
+    <div class="menu">
+        <div class="menu-notificationWrapper">
+            <a href="/notification/">
+                <img src="/static/image/noti.png" class="menu-notification_image">
+                {% if notifications_count > 0 %}
+                <div class="menu-notification_count">
+                    <div class="menu-notification_countText">
+                        {{notifications_count}}
+                    </div>
+                </div>
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="menu-profileWrapper">
+            {% if not user.is_authenticated %}
+                <img src="/static/image/unknown.png" class="menu-profile_image">
+                <br>
+                <font></font>
+            {% else %}
+                <!-- <img src="user.profile_image.url" class="menu-profile_image"> -->
+                <img src="/static/image/unknown.png" class="menu-profile_image">
+                <br>
+                <font>{{user.username}}</font>
+            {% endif %}
+        </div>
+
+        <div class="menu-listWrapper">
+            <div class="menu-list-itemWrapper">
+                <div class="menu-list-item-myWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            MY
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/login/">
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/join/">
+                                Join
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/mypage/">
+                                Mypage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-list-item-categoryWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            CATEGORY
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/main/">
+                                Home
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/aboutus/">
+                                About us
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catsitter_search/">
+                                Catsitter search
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catsitter_mode/">
+                                Catsitter mode
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catee_mode/">
+                                Catee mode
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-list-item-contactWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            CONTACT
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            wnstlr24@gmail.com
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="menu-aboutWrapper">
+
+        </div>
+
+        <div class="menu-closeWrapper">
+            <img class="menu-close_icon" 
+                src="/static/image/close.png"
+                onclick="close_menu();"
+                >
+        </div>
+    </div>
+    <!-- menu end -->
+
+    <!-- content start -->
+    <div class="content">
+        <div class='content-searchWrapper'>
+            <div class='content-search-addressWrapper'>
+                <!-- <input type="text" name="user_postcode" id="sample3_postcode" placeholder="우편번호" value="{{user.postcode}}" required><br> -->
+                <input type="text" name="user_address" id="sample3_address" placeholder="주소" value="{{user.address}}"required>
+                <!-- <input type="text" name="user_detail_address" id="sample3_detailAddress" placeholder="상세주소" value="{{user.detail_address}}"required><br> -->
+                <!-- <input type="text" name="user_extra_address" id="sample3_extraAddress" placeholder="참고항목" value="{{user.extra_address}}"> -->
+                <input type="button" class="content-search-address_button" onclick="sample3_execDaumPostcode()" value="주소변경하기">
+                <div id="wrap">
+                    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" 
+                        id="btnFoldWrap" 
+                        style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" 
+                        onclick="foldDaumPostcode()" 
+                        alt="접기 버튼">
+                </div>
+            </div>
+
+            <div class="content-search-firstWrapper">
+                <div class="content-serarch-placeWrapper">
+                    <div class="content-search-titleWrapper">
+                        <div class="content-search-title_text">
+                            &nbsp;탁묘 장소
+                        </div>
+                    </div>
+                    <div class="content-search-selectWrapper">
+                        <select class="content-search_select" id="select_place">
+                            <option value="visit">방문탁묘</option>
+                            <option value="consignment">위탁탁묘</option>
+                            <option value="both">상관없음</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="content-serarch-havePetWrapper">
+                    <div class="content-search-titleWrapper">
+                        <div class="content-search-title_text">
+                            &nbsp;반려동물 여부
+                        </div>
+                    </div>
+                    <div class="content-search-selectWrapper" id="select_havepet">
+                        <select class="content-search_select">
+                            <option value="no">없음</option>
+                            <option value="yes">있음</option>
+                            <option value="both">상관없음</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="content-search-secondWrapper">
+                <div class="content-search-timeWrapper">
+                    <div class="content-search-titleWrapper">
+                        <div class="content-search-title_text">
+                            &nbsp;가능 시간
+                        </div>
+                    </div>
+                    <div class="content-search-selectWrapper">
+                        <div class="content-search-select-itemWrapper">
+                            <input class="content-search-select_item" type="radio" name="time" value="am">오전
+                            <input class="content-search-select_item" type="radio" name="time" value="pm">오후
+                            <input class="content-search-select_item" type="radio" name="time" value="both">상관없음
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-search-secondWrapper">
+                <div class="content-search-timeWrapper">
+                    <div class="content-search-titleWrapper">
+                        <div class="content-search-title_text">
+                            &nbsp;성별
+                        </div>
+                    </div>
+                    <div class="content-search-selectWrapper">
+                        <div class="content-search-select-itemWrapper">
+                            <input class="content-search-select_item" type="radio" name="gender" value="men">남자
+                            <input class="content-search-select_item" type="radio" name="gener" value="women">여자
+                            <input class="content-search-select_item" type="radio" name="gender" value="both">상관없음
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-search-secondWrapper">
+                <div class="content-search-timeWrapper">
+                    <div class="content-search-titleWrapper">
+                        <div class="content-search-title_text">
+                            &nbsp;알약 투약 가능
+                        </div>
+                    </div>
+                    <div class="content-search-selectWrapper">
+                        <div class="content-search-select-itemWrapper">
+                            <input class="content-search-select_item" type="radio" name="pill" value="possible">가능
+                            <input class="content-search-select_item" type="radio" name="pill" value="both">상관없음
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="content-search_button">
+                검색하기
+            </button>
+        </div>
+        <div class="content-catsitterListWrapper">
+            <div class="content-catsitter-topWrapper">
+                <div class="content-catsitter-top-sortWrapper">
+                    <select class="content-catsitter-top-sort_select" id="select_sort">
+                        <option value="latest">최신순</option>
+                        <option value="rate">평점순</option>
+                        <option value="distance">거리순</option>
+                    </select>
+                </div>
+            </div>
+            <div class="content-catsitter-resultWrapper">
+                {% for catsitter in catsitters %}
+                    <div class="content-catsitter-itemWrapper">
+                        <div class="content-catsitter-item-profileWrapper">
+                            <div class="content-catsitter-item-profile-imageWrapper">
+                                <img class="content-catsitter-item-profile_image" src="{{catsitter.profile_image.url}}">
+                            </div>
+                            <div class="content-catsitter-item-profile-textWrapper">
+                                <div class="content-catsitter-item-profile_text">
+                                    {{catsitter.username}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-catsitter-item-infoWrapper">
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- content end -->
+
+    <!-- import js -->
+    <script src="/static/js/search_catsitter.js" async></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+</body>
+</html>
