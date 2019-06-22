@@ -8,7 +8,7 @@ class User(AbstractUser) :
     address = models.CharField(max_length=255, default='unknown')
     detail_address = models.CharField(max_length=255, default='unknown')
     extra_address = models.CharField(max_length=255, default='unknown')
-    post_code = models.CharField(max_length=255, default='unknown')
+    postcode = models.CharField(max_length=255, default='unknown')
     phone = models.CharField(max_length=20, default='unknown')
     check_phone = models.BooleanField(default=False)
     is_catsitter = models.BooleanField(default=False)
