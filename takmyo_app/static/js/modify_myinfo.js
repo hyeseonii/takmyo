@@ -75,7 +75,7 @@ $("#current_pwInput").change(function(){
     // 객체가 생성되고 current_pw_input을 객체에 담는다
     formdata.append('current_pw_input',current_pw_input);
 
-    fetch('./check_current_pw',{
+    fetch('./check_current_pw/',{
         method:'POST',
         body:formdata,
     })
