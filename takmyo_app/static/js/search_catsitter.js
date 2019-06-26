@@ -18,6 +18,35 @@ const sort_by_rate = (category) =>{
     // });
 }
 
+//  검색하기 버튼 눌렀을 때 
+const searching_catsitter = () => {
+    const place_value = $('select[id=select_place').val();
+    const have_pet_value = $('select[id=select_havePet]').val();
+    const time_value = $('input[name=time]:checked').val();
+    const gender_value = $('input[name=gender]:checked').val();
+    const pill_value = $('input[name=pill]:checked').val();
+
+    console.log(place_value, have_pet_value, time_value, gender_value, pill_value);
+}
+
+
+$("#select_place").change(function(){
+    const current_value = $(this).val();
+    console.log(current_value);
+
+    // 위탁 탁묘일 때 반려동물 여부 활성화
+    if(current_value == 'consignment'){
+        $("#select_havePet").attr({
+            'disabled':false 
+        });
+    }
+    // 방문 탁묘일 때 반려동물 여부 비활성화 
+    else{
+        $("#select_havePet").attr({
+            'disabled': true
+        });
+    }
+});
 
 
 // 주소 api

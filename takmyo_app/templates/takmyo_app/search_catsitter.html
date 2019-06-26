@@ -200,10 +200,24 @@
                         </div>
                     </div>
                     <div class="content-search-selectWrapper">
-                        <select class="content-search_select" id="select_place">
-                            <option value="visit">방문탁묘</option>
-                            <option value="consignment">위탁탁묘</option>
-                            <option value="both">상관없음</option>
+                        <select class="content-search_select" id="select_place" name="select_place">
+                            {% if not select_place_value %}
+                                <option value="visit">방문탁묘</option>
+                                <option value="consignment">위탁탁묘</option>
+                                <option value="both">둘다가능</option>
+                            {% elif select_place_value == 'visit' %}
+                                <option value="visit" selected>방문탁묘</option>
+                                <option value="consignment">위탁탁묘</option>
+                                <option value="both">둘다가능</option>
+                            {% elif select_place_value == 'consignment' %}
+                                <option value="visit">방문탁묘</option>
+                                <option value="consignment" selected>위탁탁묘</option>
+                                <option value="both">둘다가능</option>
+                            {% elif select_place_value == 'both' %}
+                                <option value="visit">방문탁묘</option>
+                                <option value="consignment">위탁탁묘</option>
+                                <option value="both" selected>둘다가능</option>
+                            {% endif %}
                         </select>
                     </div>
                 </div>
@@ -214,12 +228,60 @@
                             &nbsp;반려동물 여부
                         </div>
                     </div>
-                    <div class="content-search-selectWrapper" id="select_havepet">
-                        <select class="content-search_select">
-                            <option value="no">없음</option>
-                            <option value="yes">있음</option>
-                            <option value="both">상관없음</option>
+                    <div class="content-search-selectWrapper">
+                        {% if select_place_value == 'consignment' %}
+                            <select class="content-search_select" id="select_havePet" name="select_havePet">
+                        {% else %}
+                            <select class="content-search_select" id="select_havePet" name="select_havePet" disabled=true>
+                        {% endif %}
+                            {% if select_havePet_value == 'unknown' or not select_havePet_value %}
+                                <option value="no">없음</option>
+                                <option value="yes">있음</option>
+                                <option value="both" selected>협의가능</option>
+                            {% elif select_havePet_value == 'no' %}
+                                <option value="no" selected>없음</option>
+                                <option value="yes">있음</option>
+                                <option value="both">협의가능</option>
+                            {% elif select_havePet_value == 'yes' %}
+                                <option value="no">없음</option>
+                                <option value="yes" selected>있음</option>
+                                <option value="both">협의가능</option>
+                            {% elif select_havePet_value == 'both' %}
+                                <option value="no">없음</option>
+                                <option value="yes">있음</option>
+                                <option value="both" selected>협의가능</option>
+                            {% endif %}
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="content-search-secondWrapper">
+                <div class="content-search-timeWrapper">
+                    <div class="content-search-titleWrapper">
+                        <div class="content-search-title_text">
+                            &nbsp;평일/주말
+                        </div>
+                    </div>
+                    <div class="content-search-selectWrapper">
+                        <div class="content-search-select-itemWrapper">
+                            {% if not select_day %}
+                                <input class="content-search-select_item" type="radio" name="day" value="weekday">평일
+                                <input class="content-search-select_item" type="radio" name="day" value="weekend">주말
+                                <input class="content-search-select_item" type="radio" name="day" value="both" checked>협의가능
+                            {% elif select_day == 'weekday' %}
+                                <input class="content-search-select_item" type="radio" name="day" value="weekday" checked>평일
+                                <input class="content-search-select_item" type="radio" name="day" value="weekend">주말
+                                <input class="content-search-select_item" type="radio" name="day" value="both">협의가능
+                            {% elif select_day == 'weekend' %}
+                                <input class="content-search-select_item" type="radio" name="day" value="weekday">평일
+                                <input class="content-search-select_item" type="radio" name="day" value="weekend" checked>주말
+                                <input class="content-search-select_item" type="radio" name="day" value="both">협의가능
+                            {% elif select_day == 'both' %}
+                                <input class="content-search-select_item" type="radio" name="day" value="weekday">평일
+                                <input class="content-search-select_item" type="radio" name="day" value="weekend">주말
+                                <input class="content-search-select_item" type="radio" name="day" value="both" checked>협의가능
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,13 +294,28 @@
                     </div>
                     <div class="content-search-selectWrapper">
                         <div class="content-search-select-itemWrapper">
-                            <input class="content-search-select_item" type="radio" name="time" value="am">오전
-                            <input class="content-search-select_item" type="radio" name="time" value="pm">오후
-                            <input class="content-search-select_item" type="radio" name="time" value="both">상관없음
+                            {% if not select_time %}
+                                <input class="content-search-select_item" type="radio" name="time" value="am">오전
+                                <input class="content-search-select_item" type="radio" name="time" value="pm">오후
+                                <input class="content-search-select_item" type="radio" name="time" value="both" checked>협의가능
+                            {% elif select_time == 'am' %}
+                                <input class="content-search-select_item" type="radio" name="time" value="am" checked>오전
+                                <input class="content-search-select_item" type="radio" name="time" value="pm">오후
+                                <input class="content-search-select_item" type="radio" name="time" value="both">협의가능
+                            {% elif select_time == 'pm' %}
+                                <input class="content-search-select_item" type="radio" name="time" value="am">오전
+                                <input class="content-search-select_item" type="radio" name="time" value="pm" checked>오후
+                                <input class="content-search-select_item" type="radio" name="time" value="both">협의가능
+                            {% elif select_time == 'both' %}
+                                <input class="content-search-select_item" type="radio" name="time" value="am">오전
+                                <input class="content-search-select_item" type="radio" name="time" value="pm">오후
+                                <input class="content-search-select_item" type="radio" name="time" value="both" checked>협의가능
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="content-search-secondWrapper">
                 <div class="content-search-timeWrapper">
                     <div class="content-search-titleWrapper">
@@ -248,13 +325,28 @@
                     </div>
                     <div class="content-search-selectWrapper">
                         <div class="content-search-select-itemWrapper">
-                            <input class="content-search-select_item" type="radio" name="gender" value="men">남자
-                            <input class="content-search-select_item" type="radio" name="gener" value="women">여자
-                            <input class="content-search-select_item" type="radio" name="gender" value="both">상관없음
+                            {% if not select_gender %}
+                                <input class="content-search-select_item" type="radio" name="gender" value="남">남
+                                <input class="content-search-select_item" type="radio" name="gender" value="여">여
+                                <input class="content-search-select_item" type="radio" name="gender" value="both" checked>무관
+                            {% elif select_gender == '남' %}
+                                <input class="content-search-select_item" type="radio" name="gender" value="남" checked>남
+                                <input class="content-search-select_item" type="radio" name="gender" value="여">여
+                                <input class="content-search-select_item" type="radio" name="gender" value="both">무관
+                            {% elif select_gender == '여' %}
+                                <input class="content-search-select_item" type="radio" name="gender" value="남">남
+                                <input class="content-search-select_item" type="radio" name="gender" value="여" checked>여
+                                <input class="content-search-select_item" type="radio" name="gender" value="both">무관
+                            {% elif select_gender == 'both' %}
+                                <input class="content-search-select_item" type="radio" name="gender" value="남">남
+                                <input class="content-search-select_item" type="radio" name="gender" value="여">여
+                                <input class="content-search-select_item" type="radio" name="gender" value="both" checked>무관
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="content-search-secondWrapper">
                 <div class="content-search-timeWrapper">
                     <div class="content-search-titleWrapper">
@@ -264,13 +356,21 @@
                     </div>
                     <div class="content-search-selectWrapper">
                         <div class="content-search-select-itemWrapper">
-                            <input class="content-search-select_item" type="radio" name="pill" value="possible">가능
-                            <input class="content-search-select_item" type="radio" name="pill" value="both">상관없음
+                            {% if not select_pill %}
+                                <input class="content-search-select_item" type="radio" name="pill" value="possible">가능
+                                <input class="content-search-select_item" type="radio" name="pill" value="both" checked>무관
+                            {% elif select_pill == 'possible' %}
+                                <input class="content-search-select_item" type="radio" name="pill" value="possible" checked>가능
+                                <input class="content-search-select_item" type="radio" name="pill" value="both">무관
+                            {% elif select_pill == 'both' %}
+                                <input class="content-search-select_item" type="radio" name="pill" value="possible">가능
+                                <input class="content-search-select_item" type="radio" name="pill" value="both" checked>무관
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="content-search_button">
+            <button class="content-search_button" onclick="catsitter_search()">
                 검색하기
             </button>
         </div>

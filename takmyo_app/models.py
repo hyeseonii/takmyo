@@ -24,16 +24,38 @@ class User(AbstractUser) :
 
 class Catsitter(models.Model) :
 
+    PLACE_CHOICES = {
+        ('visit','Visit'),
+        ('consignment', 'Consignment'),
+        ('both','Both')
+    }
+
+    TIME_CHOICES = {
+        ('am', 'Am'),
+        ('pm', 'Pm'),
+        ('both', 'Both')
+    }
+
+    DAY_CHOICES = {
+        ('weekday', 'Weekday'),
+        ('weekend','Weekend'),
+        ('both','Both')
+    }
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default="unknown")
     catsitter_profile_image = models.ImageField(null=True, blank=True, upload_to='catsiiter_profileImage/', default="unknown.png")
     rate = models.FloatField(blank=True, default=0.0)
     have_pet = models.BooleanField(default=False)
     have_pet_experience = models.BooleanField(default=False)
-    care_experience = models.BooleanField(default=False)
+    have_care_experience = models.BooleanField(default=False)
     available_pill = models.BooleanField(default=False)
+    available_identification = models.BooleanField(default=False)
+    available_place = models.CharField(max_length=10, choices=PLACE_CHOICES, default='')
+    
     available_visit = models.BooleanField(default=False)
     available_consignment = models.BooleanField(default = False)
+   
 
     visit_price_per_once = models.IntegerField(default=0)
     visit_price_per_extra_cat = models.IntegerField(default=0)
@@ -45,18 +67,18 @@ class Catsitter(models.Model) :
 
     register_date = models.DateTimeField(auto_now_add=True)
    
-    available_weekday_am = models.BooleanField(default=False)
-    available_weekday_pm = models.BooleanField(default=False)
+    available_day = models.CharField(max_length=10, choices=DAY_CHOICES, default='')
+    
+    available_weekday_time = models.CharField(max_length=10, choices=TIME_CHOICES, default='')
+    available_weekend_time = models.CharField(max_length=10, choices=TIME_CHOICES, default='')
+    
+    introduce = models.TextField(default="")
 
-    available_weekend_am = models.BooleanField(default=False)
-    available_weekend_am = models.BooleanField(default=False)
-
+    warning = models.TextField(default="")
+    
     available_region = models.TextField(default="")
 
-    introduce = models.TextField(default="")
-    
-    warning = models.TextField(default="")
-
+    activation = models.BooleanField(default=False)
 
     def __str__(self) :
 

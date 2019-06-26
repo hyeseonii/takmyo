@@ -4,8 +4,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login,logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import requests
 from .models import *
+import requests
+from .serializers import *
+
 
 # Create your views here.
 def index(request) :
@@ -310,8 +312,342 @@ def catsitter_search(request) :
 
     User = get_user_model()
 
-    catsitters = User.objects.filter(is_catsitter=True)
+    if request.method == 'GET' :
 
-    context = {'user': user, 'catsitters': catsitters}
+        # 회원가입+로그인 한 user 경우
+        if user.is_authenticated :
 
-    return render(request, 'takmyo_app/search_catsitter.html',context)
+            request.session['select_address'] = user.address
+        
+        else :
+
+            request.session['select_address'] = 'unknown'
+        
+        request.session['select_place'] = 'visit'
+        request.session['select_havePet'] = 'unknown'
+        request.session['day'] = 'both'
+        request.session['time'] = 'both'
+        request.session['gender'] = 'both'
+        request.session['pill'] = 'both'
+
+        catsitters = Catsitter.objects.filter(activation=True)
+
+        context = {'user':user,'catsitters':catsitters}
+
+        return render(request, 'takmyo_app/search_catsitter.html')
+
+
+    elif request.method == 'POST' :
+
+        select_address_value = request.POST.get('user_address', 'unknown')
+        select_place_value = request.POST.get('select_place','unknown')
+        select_havePet_value = request.POST.get('select_havePet','unknown')
+        select_day = request.POST.get('day','unknown')
+        select_time = request.POST.get('time','unknown')
+        select_gender = request.POST.get('gender','unknown')
+        select_pill = request.POST.get('pill','unknown')
+
+        if select_havePet_value == 'yes' :
+            select_havePet_value == True
+        elif select_havePet_value == 'no' :
+            select_havePet_value = False
+
+        if select_pill == 'possible' :
+            select_pill = True
+
+        print(select_address_value, select_place_value, select_havePet_value, select_day, select_time, select_gender, select_pill)
+
+        # <탁묘 장소>
+        # 탁묘 장소가 '둘다가능'일 경우
+        if select_place_value == 'both' :
+            catsitters = Catsitter.objects.filter(activation=True)
+        else :
+            catsitters = Catsitter.objects.filter(
+                activation = True,
+                available_place = select_place_value
+            ) | Catsitter.objects.filter(availbable_place='both'
+            )    
+        
+        print(catsitters)
+
+        # <반려동물 여부>
+        # 위탁방문을 선택(disabled == False 인 경우에만)할 때만 활성화 
+        if select_havePet_value != 'unknown' :
+            if select_havePet_value != 'both' :
+                catsiiters = catsitters.filter(
+                    have_pet = select_havePet_value
+                    )
+
+        # <평일/주말>
+        if select_day != 'both' :
+            catsitters = catsitters.filter(
+                available_day = select_day 
+            ) | catsitters.filter(
+                available_day = 'both'
+            )
+                
+        # <가능 시간>
+        if select_time != 'both' :
+            if select_day == 'weekday' :
+                catsitters = catsitters.filter(
+                    available_weekday_time = select_time 
+                ) | catsitters.filter(available_weekday_time = 'both'
+                )
+            elif select_day == 'weekend' :
+                catsitters = catsiiters.filter(
+                    available_weekday_time = select_time
+                ) | catsitters.filter(available_weekday_time = 'both'
+                )
+
+            #가능 시간을 '협의가능'이라고 선택하고! 주말/평일은 상관없음 선택할 경우  
+            else :
+                catsiiters = catsitters.filter(
+                    available_weekday_time = select_time
+                ) | catsitters.filter(
+                    available_weekday_time = 'both'
+                ) | catsiiters.filter(
+                    available_weekend_time = select_time
+                ) | catsitters.filter(
+                    available_weekend_time = 'both'
+                )
+
+        if select_gender != 'both' :
+            catsitters = catsitters.filter(
+                user__gender = select_gender
+            )
+
+        if select_pill != 'both' :
+            catsitters = catsitters.filter(
+                available_pill = select_pill
+            )
+
+        print(catsitters)
+
+        print(select_address_value, select_place_value, select_havePet_value, select_day, select_time, select_gender, select_pill)
+
+
+# from django.db.models import Q
+
+# def test(request) :
+
+#     User = get_user_model()
+
+#     users = User.objects.filter(~Q(lat=0.0, lng=0.0))
+
+#     context = {'user' : users}
+
+#     return render(request, 'takmyo_app/test.html', context)
+
+        if select_havePet_value == True :
+            select_havePet_value = 'yes'
+        elif select_havePet_value == False :
+            select_havePet_value = 'no'
+            
+        if select_pill == True :
+            select_pill = 'possible'
+
+        # session: 검색할 때 사용자가 선택했던 정보를 그대로 서버에서 가지고 있는
+        request.session['select_address'] = select_address_value
+        request.session['select_place'] = select_place_value
+        request.session['select_havePet'] = select_havePet_value
+        request.session['day'] = select_day
+        request.session['time'] = select_time
+        request.session['gender'] = select_gender
+        request.session['pill'] = select_pill
+
+        context = { 'user' : user , 
+                    'catsitters' : catsitters , 
+                    'select_place_value' : select_place_value ,
+                    'select_havePet_value' : select_havePet_value,
+                    'select_day' : select_day,
+                    'select_time' : select_time,
+                    'select_gender' : select_gender,
+                    'select_pill' : select_pill
+                }
+
+        return render(request, 'takmyo_app/search_catsitter.html', context)
+
+    
+def get_user_list_by_distance(request) :
+
+    select_address = request.session['select_address']
+    select_place_value = request.session['select_place']
+    select_havePet_value = request.session['select_havePet']
+    select_day = request.session['day']
+    select_time = request.session['time']
+    select_gender = request.session['gender']
+    select_pill = request.session['pill']
+    if select_pill == 'possible' :
+        select_pill = True
+
+    print(select_address, select_place_value, select_havePet_value, select_day, select_time, select_gender, select_pill)
+
+
+    if select_place_value == 'both' :
+            catsitters = Catsitter.objects.filter(activation=True)
+    else :
+        catsitters = Catsitter.objects.filter(
+            available_place = select_place_value
+        )
+
+    print(catsitters)
+
+    if select_havePet_value != 'unknown' :
+        catsitters = catsitters.filter(
+            have_pet = select_havePet_value
+        )
+
+    if select_day != 'both' :
+        catsitters = catsitters.filter(
+            available_day = select_day
+        ) | catsitters.filter(
+            available_day = 'both'
+        )
+
+    if select_time != 'both' :
+        if select_day == 'weekday' :
+            catsitters = catsitters.filter(
+                available_weekday_time = select_time
+            ) | catsitters.filter(
+                available_weekday_time = 'both'
+            )
+        elif select_day == 'weekend' :
+            catsitters = catsitters.filter(
+                available_weekend_time = select_time
+            ) | catsitters.filter(
+                available_weekday_time = 'both'
+            )
+        else :
+            catsitters = catsitters.filter(
+                available_weekday_time = select_time
+            ) | catsitters.filter(
+                available_weekend_time = select_time
+            ) | catsitters.filter(
+                available_weekday_time = 'both'
+            )
+
+    if select_gender != 'both' :
+        catsitters = catsitters.filter(
+            user__gender = select_gender
+        )
+
+    if select_pill != 'both' :
+        catsitters = catsitters.filter(
+            available_pill = select_pill
+        )
+
+    print(catsitters)
+
+    serializer = CatsitterSerializer(catsitters, many=True)
+
+    address = select_address
+    api_key = "AIzaSyDyFSiU__Yph4023Zgl_Ptc-WNuEQ6jTGU"
+    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    api_response_dict = api_response.json()
+
+    # print(api_response_dict)
+
+    if api_response_dict['status'] == 'OK':
+        latitude = api_response_dict['results'][0]['geometry']['location']['lat']
+        longitude = api_response_dict['results'][0]['geometry']['location']['lng']
+        print('Latitude:', latitude)
+        print('Longitude:', longitude)
+
+        result = { "result" : "success" , 'catsitters' : serializer.data , 'lat' : latitude , 'lng' : longitude }
+
+    else :
+
+        result = { "result" : "success" , 'catsitters' : serializer.data , 'lat' : 0.0 , 'lng' : 0.0 }
+
+    return JsonResponse(result)
+
+def get_user_list_by_rate(request) :
+
+    select_address = request.session['select_address']
+    select_place_value = request.session['select_place']
+    select_havePet_value = request.session['select_havePet']
+    select_day = request.session['day']
+    select_time = request.session['time']
+    select_gender = request.session['gender']
+    select_pill = request.session['pill']
+    if select_pill == 'possible' :
+        select_pill = True
+
+    print(select_address, select_place_value, select_havePet_value, select_day, select_time, select_gender, select_pill)
+
+
+    if select_place_value == 'both' :
+            catsitters = Catsitter.objects.filter(activation=True)
+    else :
+        catsitters = Catsitter.objects.filter(
+            available_place = select_place_value
+        )
+
+    if select_havePet_value != 'unknown' :
+        catsitters = catsitters.filter(
+            have_pet = select_havePet_value
+        )
+
+    if select_day != 'both' :
+        catsitters = catsitters.filter(
+            available_day = select_day
+        ) | catsitters.filter(
+            available_day = 'both'
+        )
+
+    if select_time != 'both' :
+        if select_day == 'weekday' :
+            catsitters = catsitters.filter(
+                available_weekday_time = select_time
+            ) | catsitters.filter(
+                available_weekday_time = 'both'
+            )
+        elif select_day == 'weekend' :
+            catsitters = catsitters.filter(
+                available_weekend_time = select_time
+            ) | catsitters.filter(
+                available_weekday_time = 'both'
+            )
+        else :
+            catsitters = catsitters.filter(
+                available_weekday_time = select_time
+            ) | catsitters.filter(
+                available_weekend_time = select_time
+            ) | catsitters.filter(
+                available_weekday_time = 'both'
+            )
+
+    if select_gender != 'both' :
+        catsitters = catsitters.filter(
+            user__gender = select_gender
+        )
+
+    if select_pill != 'both' :
+        catsitters = catsitters.filter(
+            available_pill = select_pill
+        )
+
+    catsitters = catsitters.order_by('-rate')
+
+    serializer = CatsitterSerializer(catsitters, many=True)
+
+    address = select_address
+    api_key = "AIzaSyDyFSiU__Yph4023Zgl_Ptc-WNuEQ6jTGU"
+    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    api_response_dict = api_response.json()
+
+    # print(api_response_dict)
+
+    if api_response_dict['status'] == 'OK':
+        latitude = api_response_dict['results'][0]['geometry']['location']['lat']
+        longitude = api_response_dict['results'][0]['geometry']['location']['lng']
+        print('Latitude:', latitude)
+        print('Longitude:', longitude)
+
+        result = { "result" : "success" , 'catsitters' : serializer.data , 'lat' : latitude , 'lng' : longitude }
+
+    else :
+
+        result = { "result" : "success" , 'catsitters' : serializer.data , 'lat' : 0.0 , 'lng' : 0.0 }
+
+    return JsonResponse(result)
