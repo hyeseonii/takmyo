@@ -262,106 +262,109 @@
 
     .content-search-address_button{
         position: relative;
-        border:none;
-        outline:none;
-        background-color:#D941C5;
-        font-weight:800;
+        border: none;
+        outline: none;
+        background-color: blueviolet;
     }
 
     .content-search-firstWrapper{
         position: relative;
-        width:100%;
-        height:20vw;
-        background-color:blue;
+        width: 100%;
+        height: 20vw;
+        background-color: violet;
     }
 
-    .content-serarch-placeWrapper{
+    .content-search-placeWrapper{
         position: relative;
-        width:50%;
-        height:100%;
-        float:left;
+        width: 50%;
+        height: 100%;
+        float: left;
         background-color: brown;
     }
 
-    .content-serarch-havePetWrapper{
+    .content-search-havePetWrapper{
         position: relative;
-        width:50%;
-        height:100%;
-        float:left;
+        width: 50%;
+        height: 100%;
+        float: left;
         background-color: brown;
     }
 
     .content-search-titleWrapper{
         position: relative;
-        width:100%;
+        width: 100%;
         height: 30%;
-        background-color:aqua;
+        background-color: wheat;
+        font-weight: 800;
     }
 
     .content-search-title_text{
         position: relative;
-        width:100%;
+        width: 100%;
         height: auto;
-        background-color:#D941C5;
-        top:50%;
+        top: 50%;
         transform: translateY(-50%);
-        font-weight: 800;
     }
 
     .content-search-selectWrapper{
         position: relative;
-        width:100%;
-        height:70%;
-        background-color: #FFD9FA;
+        width: 100%;
+        height: 70%;
+        background-color: saddlebrown;
     }
 
     .content-search_select{
         position: relative;
-        width:90%;
-        height:50%;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
-    }
-
-    .content-search_button{
-        position: relative;
-        width:40vw;
-        height:10vw;
-        left:50%;
-        transform: translate(-50%,50%);
-        background-color: #D941C5;
-        border: none;
-        outline: none;
-        font-weight: 800;
+        width: 90%;
+        height: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .content-search-secondWrapper{
         position: relative;
-        width:100%;
-        height:20vw;
-        background-color:blue;
+        width: 100%;
+        height: 20vw;
+        background-color: violet;
     }
 
     .content-search-timeWrapper{
         position: relative;
-        width:100%;
+        width: 100%;
         height: 100%;
-        background-color:brown;
+        background-color: brown;
     }
 
     .content-search-select-itemWrapper{
         position: relative;
-        width:100%;
-        height:auto;
-        top:50%;
-        transform:translateY(-50%);
+        width: 100%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .content-search-select_item{
-        margin-left:5%;
-        margin-right:1%;
+        margin-left: 5%;
+        margin-right: 1%;
     }
+
+    .content-search_button{
+        position: relative;
+        width: 40vw;
+        height: 10vw;
+        left: 50%;
+        transform: translate(-50%,50%);
+        border: none;
+        outline: none;
+        background-color: #FFD9FA;
+        font-weight: 800;
+    }
+
+
+
+
+
     .content-catsitterListWrapper{
         position: relative;
         width: 100%;
@@ -377,21 +380,28 @@
     }
 
     .content-catsitter-top-sortWrapper{
-        position: absolute;
+        position: relative;
         width: 30%;
         height: 100%;
         background-color: darkblue;
-        top:0;
-        right:0;
+        float: right;
     }
 
     .content-catsitter-top-sort_select{
         position: relative;
-        width:90%;
-        height:50%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
+        width: 90%;
+        height: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .content-catsitter-top-selectDistanceWrapper{
+        position: relative;
+        width: 30%;
+        height: 100%;
+        background-color: sandybrown;
+        float: right;
     }
 
     .content-catsitter-resultWrapper{
@@ -431,6 +441,7 @@
         height: 17vw;
         top: 50%;
         left: 50%;
+        border-radius: 50%;
         transform: translate(-50%, -50%);
     }
 
@@ -458,7 +469,92 @@
         float: left;
     }
 
-    
+    .content-catsitter-item-info-topWrapper{
+        position: relative;
+        width: 100%;
+        height: 25%;
+        background-color: turquoise;
+    }
+
+    .content-catsitter-item-info-distanceWrapper{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        background-color: slateblue;
+        float: right;
+    }
+
+    .content-catsitter-item-info-distance_text{
+        position: relative;
+        width: 100%;
+        height: auto;
+        text-align: right;
+        font-size: 5vw;
+        font-weight: 800;
+    }
+
+    .content-catsitter-item-info-selectDistanceWrapper{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        background-color: sandybrown;
+        float: right;
+    }
+
+    .content-catsitter-item-info-middleWrapper{
+        position: relative;
+        width: 100%;
+        height: 50%;
+        background-color: seagreen;
+    }
+
+    .content-catsitter-item-info-middle-regionWrapper{
+        position: relative;
+        width: 100%;
+        height: 50%;
+        background-color: #FFD9FA;
+    }
+
+    .content-catsitter-item-info-middle-introduceWrapper{
+        position: relative;
+        width: 100%;
+        height: 50%;
+        background-color: #f8ce0b;
+    }
+
+    .content-catsitter-item-info-middle_text{
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* star rating css */
+    .stars-outer {
+        display: inline-block;
+        position: relative;
+        font-family: FontAwesome;
+      }
+
+      .stars-outer::before {
+        content: "\f006 \f006 \f006 \f006 \f006";
+      }
+
+      .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+      }
+
+      .stars-inner::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        color: #f8ce0b;
+      }
+
 
 
     /* 주소 api */

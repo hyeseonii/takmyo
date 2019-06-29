@@ -334,7 +334,9 @@ def catsitter_search(request) :
 
         context = {'user':user,'catsitters':catsitters}
 
-        return render(request, 'takmyo_app/search_catsitter.html')
+        print(context)
+
+        return render(request, 'takmyo_app/search_catsitter.html',context)
 
 
     elif request.method == 'POST' :
@@ -365,7 +367,7 @@ def catsitter_search(request) :
             catsitters = Catsitter.objects.filter(
                 activation = True,
                 available_place = select_place_value
-            ) | Catsitter.objects.filter(availbable_place='both'
+            ) | Catsitter.objects.filter(available_place='both'
             )    
         
         print(catsitters)
@@ -627,7 +629,7 @@ def get_user_list_by_rate(request) :
             available_pill = select_pill
         )
 
-    catsitters = catsitters.order_by('-rate')
+    catsitters = catsitters.order_by('-rate_per_five')
 
     serializer = CatsitterSerializer(catsitters, many=True)
 

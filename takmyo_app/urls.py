@@ -22,6 +22,8 @@ urlpatterns = [
     path('modify_myinfo/', views.modify_myinfo),
     path('modify_myinfo/check_current_pw/', views.check_current_pw), 
 
-    path('catsitter_search/',views.catsitter_search),   
+    path('catsitter_search/',views.catsitter_search),
+    path('catsitter_search/get_user_list/distance/', views.get_user_list_by_distance),
+    path('catsitter_search/get_user_list/rate/', views.get_user_list_by_rate), 
 
 ]
