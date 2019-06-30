@@ -318,10 +318,31 @@ def catsitter_search(request) :
         if user.is_authenticated :
 
             request.session['select_address'] = user.address
-        
+
+            address = user.address
+            api_key = "AIzaSyDyFSiU__Yph4023Zgl_Ptc-WNuEQ6jTGU"
+            api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+            api_response_dict = api_response.json()
+
+            if api_response_dict['status'] == 'OK':
+                latitude = api_response_dict['results'][0]['geometry']['location']['lat']
+                longitude = api_response_dict['results'][0]['geometry']['location']['lng']
+
+            else :
+                request.session['select_address'] = 'unknown'
+
+                latitude = 0.0
+                longitude = 0.0
+
+            print('Latitude:', latitude)
+            print('Longitude:', longitude)
+
         else :
 
             request.session['select_address'] = 'unknown'
+
+            latitude = 0.0
+            longitude = 0.0
         
         request.session['select_place'] = 'visit'
         request.session['select_havePet'] = 'unknown'
@@ -332,7 +353,7 @@ def catsitter_search(request) :
 
         catsitters = Catsitter.objects.filter(activation=True)
 
-        context = {'user':user,'catsitters':catsitters}
+        context = {'user':user,'catsitters':catsitters, 'lat':latitude, 'lng': longitude}
 
         print(context)
 
@@ -422,11 +443,10 @@ def catsitter_search(request) :
             catsitters = catsitters.filter(
                 available_pill = select_pill
             )
-
         print(catsitters)
 
         print(select_address_value, select_place_value, select_havePet_value, select_day, select_time, select_gender, select_pill)
-
+   
 
 # from django.db.models import Q
 
@@ -464,12 +484,14 @@ def catsitter_search(request) :
                     'select_day' : select_day,
                     'select_time' : select_time,
                     'select_gender' : select_gender,
-                    'select_pill' : select_pill
+                    'select_pill' : select_pill,
+                    'lat' : latitude,
+                    'lng' : longitude
                 }
 
         return render(request, 'takmyo_app/search_catsitter.html', context)
 
-    
+
 def get_user_list_by_distance(request) :
 
     select_address = request.session['select_address']
@@ -653,3 +675,20 @@ def get_user_list_by_rate(request) :
         result = { "result" : "success" , 'catsitters' : serializer.data , 'lat' : 0.0 , 'lng' : 0.0 }
 
     return JsonResponse(result)
+
+
+def show_catsitter(request, catsitter_id) :
+
+    user = request.user
+
+    print(catsitter_id)
+
+    catsitter = Catsitter.objects.get(id = catsitter_id)
+
+    print(catsitter_id)
+
+    context = { "user" : user , "catsitter" : catsitter }
+
+    print(";;;;", context)
+
+    return render(request, 'takmyo_app/show_catsitter.html', context)

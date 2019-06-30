@@ -5,3 +5,11 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Notification)
 admin.site.register(Catsitter)
+admin.site.register(Catee)
+admin.site.register(CatsitterReview)
+admin.site.register(Cat)
+admin.site.register(CateeToCatsitterForm)
+admin.site.register(CatsitterExperienceImage)
+admin.site.register(Catsitter_promotion_image)
+
+

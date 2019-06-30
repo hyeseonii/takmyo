@@ -57,11 +57,14 @@ class Catsitter(models.Model) :
 
     visit_price_per_once = models.IntegerField(default=0)
     visit_price_per_extra_cat = models.IntegerField(default=0)
+    available_change_visit_price_per_extra_cat = models.BooleanField(default = False)
+
 
     consignment_price_per_one_day = models.IntegerField(default=0)
     consignment_price_per_one_week = models.IntegerField(default=0)
     consignment_price_per_one_month = models.IntegerField(default=0)
     consignment_price_per_extra_cat = models.IntegerField(default=0)
+    available_change_consignment_price_per_extra_cat = models.BooleanField(default = False)
 
     register_date = models.DateTimeField(auto_now_add=True)
 
@@ -82,11 +85,51 @@ class Catsitter(models.Model) :
 
         return self.user.username
 
-
     class Meta :
 
         ordering = ['-register_date']
 
+
+    @property
+    def get_reviews_num(self) :
+
+        return self.catsitter_reviews.all().count()
+
+
+class Catee(models.Model) :
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length = 100, default="unknown")
+    register_date = models.DateTimeField(auto_now_add=True)
+    catee_profile_image = models.ImageField(upload_to='catee_profileImage/', default='unknown.png')
+
+    def __str__(self) :
+
+        return self.name
+
+    @property 
+    def get_cats_num(self) :
+
+        return self.catee_cats.all().count()
+
+class Cat(models.Model) :
+    
+    owner = models.ForeignKey(Catsitter, on_delete=models.CASCADE, related_name ='catee_cats')
+    cat_profile_image = models.ImageField(upload_to='cat_profileImage/' + str(owner.name) +'/', 
+                                            default='unknown.png', 
+                                            null=True, 
+                                            blank=True)
+    name = models.CharField(max_length=50,default='unknown')
+    age = models.CharField(max_length=50,default='unknown') 
+    breed = models.CharField(max_length=50,default='unknown')
+    gender = models.CharField(max_length=50,default='unknown')
+    hospital = models.CharField(max_length=200,default='unknown')
+    neutralization = models.BooleanField(default=False)
+    warning = models.TextField()
+
+    def __str__(self) :
+
+        return self.owner.name + '-' + self.name
 
 class Catsitter_promotion_image(models.Model) :
     
@@ -129,4 +172,87 @@ class Notification(models.Model) :
     class Meta :
 
         ordering = ['-created_at']
-    
+
+
+class CatsitterReview(models.Model) :
+
+    catsitter = models.ForeignKey(Catsitter, 
+                                on_delete = models.CASCADE, 
+                                null=True, 
+                                blank=True, 
+                                related_name='catsitter_reviews')
+    content = models.CharField(max_length=255, null = True, blank= True)
+    created_at = models.DateTimeField(auto_now_add = True)
+    time_rate = models.FloatField(default = 0.0)
+    kindness_rate = models.FloatField(default = 0.0)
+    achievement_rate = models.FloatField(default = 0.0)
+    total_rate = models.FloatField(default = 0.0)
+
+    def __str__(self) :
+
+        return self.catsitter.name + '-' + self.content
+
+    class Meta:
+
+        ordering=['-created_at']
+
+
+
+class CatsitterExperienceImage(models.Model) :
+
+    catsitter = models.ForeignKey(Catsitter, 
+                                on_delete = models.CASCADE, 
+                                null=True, 
+                                blank=True, 
+                                related_name='catsitter_images')
+    catsitter_experience_image = models.ImageField(upload_to ='catsitter_experienceImage/',default = 'unknown.png')
+    caption = models.CharField(max_length = 255, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) :
+
+        return self.catsitter.name + '-' + self.id 
+
+    class Meta :
+
+        ordering = ['-created_at']
+
+
+class CateeToCatsitterForm(models.Model) :
+
+
+    PLACE_CHOICES = {
+        ('visit', 'Visit'),
+        ('consignment', 'Consignment')
+    }
+
+    STATE_CHOICES ={
+        ('recognize','Recognize'),
+        ('progress','Progress'),
+        ('unrecognized','Unrecognized')
+    }
+
+    catee=models.ForeignKey(Catee, on_delete=models.CASCADE, related_name='from_catee_form')
+    catsitter=models.ForeignKey(Catsitter, on_delete=models.CASCADE, related_name='to_catee_form')
+
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(auto_now_add=True)
+
+    place = models.CharField(max_length=20, choices=PLACE_CHOICES, default='')
+
+    condition = models.TextField(default='', null=True, blank=True)
+
+    comment = models.TextField(default='', null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    state = models.CharField(max_length=50,choices=STATE_CHOICES, default='')
+
+    def __str_(self) :
+
+        return self.catee.name + '-' + self.catsitter.name
+
+
+    class Meta :
+
+        ordering = ['-created_at']
