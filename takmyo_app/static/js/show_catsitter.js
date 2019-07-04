@@ -48,42 +48,43 @@ const register_review = () => {
     const time_rate = $("#rateYo_time").rateYo("option", "rating");
     const kindness_rate = $("#rateYo_kindness").rateYo("option", "rating");
     const achievement_rate = $("#rateYo_achievement").rateYo("option", "rating");
-
     let review_comment = $("#review_comment_input").val();
+    const state = $(".content-info-review-write_form").data('state');
 
-    if(review_comment ==''){
-        review_comment = '';
+    if(review_comment =='' ){
+        review_comment = ' ';
     }
     console.log(time_rate, kindness_rate, achievement_rate);
 
-    fetch('./register_review/'  + time_rate + '/' + 
-                                kindness_rate + '/' + 
-                                achievement_rate + '/' + 
-                                review_comment + '/' )
-    .then( e => e.json())
-    .then( e =>{
-        console.log(e);
-        if(e.result == 'success'){
-            alert("리뷰 등록이 완료되었습니다.")
-            location.reload(true);
-        }
-        else if(e.result == 'failed'){
-            alert("리뷰 등록에 실패했습니다.");
-        }
-        else if(e.result == 'anonymous_user'){
-            alert("로그인 해주세요.");
-        }
-        else if(e.result == 'already registered'){
-            alert("이미 리뷰를 등록하셨습니다.");
-        }
-        else if(e.result == 'not recognized'){
-            alert("신청서가 승인되어야 리뷰를 등록할 수 있습니다.");
-        }
-        else if(e.result == 'not applied'){
-            alert("탁묘를 신청한 캣티만 리뷰를 등록할 수 있습니다.");
-        }
-    });
-}
+
+        fetch('./register_review/' + time_rate + '/' + 
+                                    kindness_rate + '/' + 
+                                    achievement_rate + '/' + 
+                                    review_comment + '/' )
+        .then( e => e.json())
+        .then( e =>{
+            console.log(e);
+            if(e.result == 'success'){
+                alert("리뷰 등록이 완료되었습니다.")
+                location.reload(true);
+            }
+            else if(e.result == 'failed'){
+                alert("리뷰 등록에 실패했습니다.");
+            }
+            else if(e.result == 'anonymous_user'){
+                alert("로그인 해주세요.");
+            }
+            else if(e.result == 'already registered'){
+                alert("이미 리뷰를 등록하셨습니다.");
+            }
+            else if(e.result == 'not recognized'){
+                alert("신청서가 승인되어야 리뷰를 등록할 수 있습니다.");
+            }
+            else if(e.result == 'not applied'){
+                alert("탁묘를 신청한 캣티만 리뷰를 등록할 수 있습니다.");
+            }
+        });
+    }
 
 function wrapWindowByMask(){
     //화면의 높이와 너비를 구한다.

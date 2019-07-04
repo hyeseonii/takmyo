@@ -683,7 +683,7 @@ def show_catsitter(request, catsitter_id) :
 
     try :
         
-        catsitter = Catsitter.objects.get(id = catsitters_id)
+        catsitter = Catsitter.objects.get(id = catsitter_id)
 
     except :
 
@@ -701,6 +701,12 @@ def register_review(request, catsitter_id, time_rate,kindness_rate, achievement_
     user = request.user
 
     print(user, time_rate, kindness_rate, achievement_rate, review_comment)
+
+    catees = Catee.objects.all()
+    print("user",user)
+    print("catees",catees)
+
+
 
     if user.is_authenticated :
 

@@ -227,7 +227,7 @@ class CateeToCatsitterForm(models.Model) :
     }
 
     STATE_CHOICES ={
-        ('recognize','Recognize'),
+        ('recognized','Recognized'),
         ('progress','Progress'),
         ('unrecognized','Unrecognized')
     }
