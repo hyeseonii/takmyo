@@ -56,7 +56,7 @@ const register_review = () => {
     }
     console.log(time_rate, kindness_rate, achievement_rate);
 
-    fetch('./register_review'  + time_rate + '/' + 
+    fetch('./register_review/'  + time_rate + '/' + 
                                 kindness_rate + '/' + 
                                 achievement_rate + '/' + 
                                 review_comment + '/' )
