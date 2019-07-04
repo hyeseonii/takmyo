@@ -681,14 +681,132 @@ def show_catsitter(request, catsitter_id) :
 
     user = request.user
 
-    print(catsitter_id)
+    try :
+        
+        catsitter = Catsitter.objects.get(id = catsitters_id)
 
-    catsitter = Catsitter.objects.get(id = catsitter_id)
+    except :
 
-    print(catsitter_id)
+        return redirect('/catsitter_search/')
 
-    context = { "user" : user , "catsitter" : catsitter }
+    context = {"user": user, "catsitter" : catsitter}
 
-    print(";;;;", context)
+    print(context)
 
-    return render(request, 'takmyo_app/show_catsitter.html', context)
+    return render(request,'takmyo_app/show_catsitter.html',context)
+    
+
+def register_review(request, catsitter_id, time_rate,kindness_rate, achievement_rate, review_comment) :
+
+    user = request.user
+
+    print(user, time_rate, kindness_rate, achievement_rate, review_comment)
+
+    if user.is_authenticated :
+
+        try :
+            catee = Catee.objects.get(user = user)
+
+        except :
+            result = {"result" : "get catee failed"}
+
+            return JsonResponse(result)
+
+        try :
+            catsitter = Catsitter.objects.get(id = catsitter_id)
+        
+        except :
+            result = {"result" : "get catsitter failed"}
+
+            return JsonResponse(result)
+
+        try :
+            form = CateeToCatsitterForm.objects.get(catee = catee, catsitter = catsitter)
+
+            if form.state != 'recognized' :
+                result = {"result" :"not recognized"}
+
+                return JsonResponse(result)
+        
+        except :
+            result = {"result" :"not applied"}
+
+            return JsonResponse(result)
+
+        try :
+            review = CatsitterReview.objects.get(catee = catee, catsitter = catsitter)
+
+            print("!!!!",review)
+
+            result = {"result" : "already registered"}
+
+            return JsonResponse(result)
+
+        except :
+            pass
+    
+
+        try :
+
+            print(catee, catsitter, review_comment, time_rate, kindness_rate, achievement_rate, (float(time_rate) + float(kindness_rate) + float(achievement_rate))/3)
+
+            time_rate = float(time_rate)
+            kindness_rate = float(kindness_rate)
+            achievement_rate = float(achievement_rate)
+            total_rate = (time_rate + kindness_rate + achievement_rate)/3
+            total_rate_per_hundred = total_rate * 20
+
+
+            new_review = CatsitterReview.objects.create(
+                catee = catee,
+                catsitter = catsitter,
+                content = review_comment,
+                time_rate = time_rate,
+                kindness_rate = kindness_rate,
+                achievement_rate = achievement_rate,
+                total_rate = total_rate,
+                total_rate_per_hundred = total_rate_per_hundred 
+            )
+
+            new_rate = 0
+            new_time_rate = 0
+            new_kindness_rate = 0
+            new_achievement_rate = 0
+            for review in catsitter.catsitter_reviews.all() :
+                new_rate += review.total_rate
+                new_time_rate += review.time_rate
+                new_kindness_rate += review.kindness_rate
+                new_achievement_rate += review.achievement_rate
+
+            new_rate = new_rate / catsitter.catsitter_reviews.all().count()
+            catsitter.rate_per_five = new_rate
+            catsitter.rate_per_hundred = new_rate * 20
+
+            new_rate = new_rate / catsitter.catsitter_reviews.all().count()
+            catsitter.rate_per_five = new_rate
+            catsitter.rate_per_hundred = new_rate * 20
+
+            new_time_rate = new_time_rate / catsitter.catsitter_reviews.all().count()
+            catsitter.time_rate_per_five = new_time_rate
+            catsitter.time_rate_per_hundred = new_time_rate * 20
+
+            new_kindness_rate = new_kindness_rate / catsitter.catsitter_reviews.all().count()
+            catsitter.kindness_rate_per_five = new_kindness_rate
+            catsitter.kindness_rate_per_hundred = new_kindness_rate * 20
+
+            new_achievement_rate = new_achievement_rate / catsitter.catsitter_reviews.all().count()
+            catsitter.achievement_rate_per_five = new_achievement_rate
+            catsitter.achievement_rate_per_hundred = new_achievement_rate * 20
+
+            catsitter.save()
+
+            result = { "result" : "success" }
+
+        except :
+
+            result = { "result" : "create review failed" }
+
+    else :
+        result = {"result" : "anonymous_user"}
+
+    return JsonResponse(result)

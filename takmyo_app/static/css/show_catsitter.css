@@ -389,7 +389,7 @@
         position: relative;
         width: 100%;
         height: 90%;
-        background-color: steelblue;
+        background-color: steelblue;     
     }
 
     #body_introduce{
@@ -432,54 +432,51 @@
 
     .content-info-introduce-availableTime-domainWrapper{
         position: relative;
-        width:40%;
-        height:100%;
-        background-color:indigo;
-        float:left;
+        width: 40%;
+        height: 100%;
+        background-color: khaki;
+        float: left;
     }
 
     .content-info-introduce-availableTime-domain{
         position: relative;
-        width:100%;
-        height:20%;
-        background-color:orangered;
+        width: 100%;
+        height: 20%;
+        background-color: indianred;
     }
 
     .content-info-introduce-availableTime-domain_text{
         position: relative;
-        width:100%;
-        height:auto;
-        top:50%;
-        transform:translateY(-50%);
-        text-align:center;
-        background-color:orange;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
     }
-    
+
     .content-info-introduce-availableTime-valueWrapper{
         position: relative;
-        width:60%;
-        height:100%;
-        background-color:blueviolet;
-        float:left;
+        width: 60%;
+        height: 100%;
+        background-color: indigo;
+        float: left;
     }
 
     .content-info-introduce-availableTime-value{
         position: relative;
-        width:100%;
-        height:20%;
-        background-color:orangered;
+        width: 100%;
+        height: 20%;
+        background-color: indianred;
     }
 
     .content-info-introduce-availableTime-value_text{
         position: relative;
-        width:100%;
-        height:auto;
-        top:50%;
-        transform:translateY(-50%);
-        text-align:center;
-        background-color:orange;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
     }
-
 
     .content-info-introduce-availableEtcWrapper{
         position: relative;
@@ -542,7 +539,7 @@
         width: 100%;
         height: 30%;
         background-color: slategray;
-        margin-bottom:30%;
+        margin-bottom: 30%;
     }
 
     .content-info-charge-visitWrapper{
@@ -556,8 +553,8 @@
         position: relative;
         width: 100%;
         height: 50%;
-        background-color: chocolate; 
-        margin-bottom:30%;
+        background-color: chocolate;
+        margin-bottom: 30%;
     }
 
     .content-info-charge-titleWrapper{
@@ -643,7 +640,7 @@
         width: 100%;
         height: 50%;
         background-color: skyblue;
-        margin-bottom:30%;
+        margin-bottom: 30%;
     }
 
     .content-info-experience-album-imageWrapper{
@@ -733,19 +730,99 @@
     .content-info-review-writeWrapper{
         position: relative;
         width: 100%;
-        height: auto;
-        min-height: 20vw;
+        height: 80vw;
         margin-bottom: 5%;
         background-color: slateblue;
     }
 
     .content-info-review_writeButton{
-        position: relative;
+        position: absolute;
         width: 30vw;
         height: 10vw;
-        margin-top: 2%;
-        margin-bottom: 5%;
-        left: 65%;
+        top: 5%;
+        right: 5%;
+        z-index: 2000;
+    }
+    
+    .content-info-review-showWrapper{
+        position: absolute;
+        width: 90%;
+        height: 80%;
+        left: 50%;
+        bottom: 2%;
+        transform: translateX(-50%);
+        background-color: sienna;
+    }
+
+    .content-info-review-show-totalWrapper{
+        position: absolute;
+        width: 90%;
+        height: 35%;
+        left: 50%;
+        top: 5%;
+        transform: translateX(-50%);
+        background-color: indianred;
+    }
+
+    .content-info-review-show-total{
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        font-size: 6vw;
+    }
+    
+    .content-info-review-show-detailWrapper{
+        position: absolute;
+        width: 90%;
+        height: 50%;
+        left: 50%;
+        bottom: 5%;
+        transform: translateX(-50%);
+        background-color: indianred;
+    }
+
+    .content-info-review-show-detail-itemWrapper{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color:indigo;
+    }
+
+    .content-info-review-show-detail-item{
+        position: relative;
+        width: 100%;
+        height: 33%;
+        background-color: tomato;
+    }
+
+    .content-info-review-show-detail-item-domain{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        background-color: salmon;
+        float: left;
+    }
+
+    .content-info-review-show-detail-item_text{
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        font-size: 3vw;
+        font-weight: 800;
+    }
+
+    .content-info-review-show-detail-item-value{
+        position: relative;
+        width: 60%;
+        height: 100%;
+        background-color: darkred;
+        float: left;
     }
 
     .content-info-review-write_form{
@@ -877,32 +954,26 @@
         transform: translate(-50%, -50%);
         display: none;
     }
-}
 
     /* bottom fixed menubar css */
     .bottom-fixed-menubar{
         position: fixed;
-        width:100%;
-        height:8%;
-        left:0;
-        bottom:0;
-        background-color:brown;
+        width: 100%;
+        height: 10%;
+        left: 0;
+        bottom: 0;
+        background-color: indigo;
     }
 
-    .bottom-fixed-menubar-button{
+    .bottom-fixed-menubar_button{
         position: relative;
-        width:40%;
-        height:60%;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%); 
-        background-color:hotpink;
-        border:none;
-        outline:none;
-        font-weight:900;
-        font-size:4.5vw;
+        width: 50%;
+        height: 60%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-
+}
 @media(min-device-width : 600px){
     *{
         display: none;

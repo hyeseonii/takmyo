@@ -237,7 +237,7 @@
                         </div>
                         <div class="content-prifile-etc-item-valueWrapper">
                             <div class="content-profile-etc-item_text">
-                                -
+                                {{catsitter.get_reviews_num}}
                             </div>
                         </div>
                     </div>
@@ -606,8 +606,91 @@
             <div class="content-info-bodyWrapper" id="body_review">
                 <div class="content-info-review-writeWrapper">
                     <button class="content-info-review_writeButton">리뷰쓰기</button>
+
+                    <div class="content-info-review-showWrapper">
+                        <div class="content-info-review-show-totalWrapper">
+                            <div class="content-info-review-show-total">
+                                <div class="stars-outer" style="font-size: 10vw;">
+                                    <div class="stars-inner" style="width: {{catsitter.rate_per_hundred}}%; font-size: 10vw;"></div>
+                                </div>
+                                {{catsitter.rate_per_five}}
+                            </div>
+                        </div>
+
+                        <div class="content-info-review-show-detailWrapper">
+                            <div class="content-info-review-show-detail-itemWrapper">
+                                <div class="content-info-review-show-detail-item">
+                                    <div class="content-info-review-show-detail-item-domain">
+                                        <div class="content-info-review-show-detail-item_text">
+                                            시간준수
+                                        </div>
+                                    </div>
+                                    <div class="content-info-review-show-detail-item-value">
+                                        <div class="content-info-review-show-detail-item_text">
+                                            <div class="stars-outer" style="font-size: 5vw;">
+                                                <div class="stars-inner" style="width: {{catsitter.time_rate_per_hundred}}%; font-size: 5vw;"></div>
+                                            </div>
+                                            {{catsitter.time_rate_per_five}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="content-info-review-show-detail-item">
+                                    <div class="content-info-review-show-detail-item-domain">
+                                        <div class="content-info-review-show-detail-item_text">
+                                            친절함
+                                        </div>
+                                    </div>
+                                    <div class="content-info-review-show-detail-item-value">
+                                        <div class="content-info-review-show-detail-item_text">
+                                            <div class="stars-outer" style="font-size: 5vw;">
+                                                <div class="stars-inner" style="width: {{catsitter.kindness_rate_per_hundred}}%; font-size: 5vw;"></div>
+                                            </div>
+                                            {{catsitter.kindness_rate_per_five}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="content-info-review-show-detail-item">
+                                    <div class="content-info-review-show-detail-item-domain">
+                                        <div class="content-info-review-show-detail-item_text">
+                                            수행능력
+                                        </div>
+                                    </div>
+                                    <div class="content-info-review-show-detail-item-value">
+                                        <div class="content-info-review-show-detail-item_text">
+                                            <div class="stars-outer" style="font-size: 5vw;">
+                                                <div class="stars-inner" style="width: {{catsitter.achievement_rate_per_hundred}}%; font-size: 5vw;"></div>
+                                            </div>
+                                            {{catsitter.achievement_rate_per_five}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="content-info-reviewListWrapper">
+                    {% for review in catsitter.catsitter_reviews.all %}
+                    <div class="content-info-reivew-itemWrapper">
+                        <div class="content-info-review-item-nameWrapper">
+                            {{review.catee.name}}
+                        </div>
+                        <div class="content-info-review-item-rateWrapper">
+                            <div class="stars-outer">
+                                <div class="stars-inner" style="width: {{review.total_rate_per_hundred}}%;"></div>
+                            </div>
+                            &nbsp;{{review.total_rate}}
+                        </div>
+                        <div class="content-info-review-item-textWrapper">
+                            <div class="content-info-review-item_text">
+                                {{review.content}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+<!-- 
                 <div class="content-info-reviewListWrapper">
                     <div class="content-info-reivew-itemWrapper">
                         <div class="content-info-review-item-nameWrapper">
@@ -641,7 +724,7 @@
                                 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -698,6 +781,7 @@
             <div class="content-info-review-write-inputWrapper">
                 <input type="text" 
                         class="content-info-review-write_input"
+                        id="review_comment_input"
                         name="review_text" 
                         placeholder="리뷰를 남겨주세요.">
             </div>
