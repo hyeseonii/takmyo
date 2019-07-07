@@ -688,6 +688,25 @@
                                 {{review.content}}
                             </div>
                         </div>
+                        {% if review.catee.user == user %}
+                        <div class="content-info-review-item-manageWrapper">
+                            <div class="content-info-review-item-manage-buttonWrapper">
+                                <button class="content-info-review-item-manage_button review_modify_button"
+                                        data-review-id={{review.id}}
+                                        data-content={{review.content}}
+                                        data-time_rate={{review.time_rate}}
+                                        data-kindness_rate={{review.time_rate}}
+                                        data-achievement_rate={{review.achievement_rate}}
+                                        onclick="open_modify_review(this);">
+                                    수정
+                                </button>
+                                <button class="content-info-review-item-manage_button review_delete_button"
+                                        onclick="open_delete_review({{review.id}});">
+                                    삭제
+                                </button>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                     {% endfor %}
 <!-- 
@@ -781,7 +800,7 @@
             <div class="content-info-review-write-inputWrapper">
                 <input type="text" 
                         class="content-info-review-write_input"
-                        
+                        id="review_comment_input"
                         name="review_text" 
                         placeholder="리뷰를 남겨주세요.">
             </div>
@@ -793,7 +812,7 @@
 
     <!-- bottom fixed menubar start -->
     <div class="bottom-fixed-menubar">
-        <button class="bottom-fixed-menubar-button">신청하기</button>
+        <button class="bottom-fixed-menubar_button">신청하기</button>
     </div>
 
 

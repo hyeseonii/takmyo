@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- import css-->
+    <link rel="stylesheet" href ="/static/css/register_cat.css">
+
+    <!-- import jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- import js -->
+    <script src="/static/js/register_cat.js" async></script>
+
+</head>
+<body>
+    <!-- top start -->
+    <div class="top">
+        <div class="top-menuWrapper">
+            <img class="top-menu_icon" 
+                src="/static/image/menu.png"
+                onclick="open_menu()"
+            >
+            {% if notifications_count > 0 %}
+            <div class="menu-notification_count">
+                <div class="menu-notification_countText">
+                    {{notifications_count}}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- top end -->
+
+    <!-- menu start -->
+    <div class="menu">
+        <div class="menu-notificationWrapper" >
+            <a href="/notification/">
+                <img src="/static/image/noti.png" class="menu-notification_image">
+                {% if notifications_count > 0 %}
+                <div class="menu-notification_count">
+                    <div class="menu-notification_countText">
+                        {{notifications_count}}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="menu-profileWrapper">
+            {% if not user.is_authenticated %}
+                <img src="/static/image/unknown.png" class="menu-profile_image">
+                <br>
+                <font></font>
+            {% else %}
+                <!-- <img src="user.profile_image.url" class="menu-profile_image"> -->
+                <img src="/static/image/unknown.png" class="menu-profile_image">
+                <br>
+                <font>{{user.username}}</font>
+            {% endif %}
+
+        </div>
+        <div class="menu-listWrapper">
+            <div class="menu-list-itemWrapper">
+                <div class="menu-list-item-myWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                                MY
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/login/">Login</a> 
+                        </div>
+                    </div>
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/join/">Join</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            <a href="/mypage/">Mypage</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-list-item-categoryWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            CATEGORY
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/main/">Home</a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/aboutus/">About us</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catsitter_search/">Catsitter search</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catsitter_mode/">Catsitter mode</a>
+                        </div>
+                    </div>
+                    <div class="menu-list-item-category">
+                        <div class="menu-list-item_text menu-list-item_textBottom">
+                            <a href="/catee_mode/">Catee mode</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-list-item-contactWrapper">
+                    <div class="menu-list-titleWrapper">
+                        <div class="menu-list-title_text">
+                            CONTACT
+                        </div>
+                    </div>
+
+                    <hr class="menu-list-title-underbar">
+
+                    <div class="menu-list-item-my">
+                        <div class="menu-list-item_text menu-list-item_textTop">
+                            hhs19962002@naver.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-aboutWrapper">
+
+        </div>
+        <div class="menu-closeWrapper">
+            <img class="menu-close_icon"
+                src="/static/image/close.png"
+                onclick="close_menu()"
+            >
+        </div>
+    </div>
+    <!-- menu end -->
+
+    <!-- content start -->
+    <div class="content">
+        <div class="content-formWrapper">
+            <div class="contnet-form-itemListWrapper">
+                <div class="content-form-itemWrapper">
+                    <div class="content-form-item-inputImageWrapper">
+                        <label for="content-form-item-imageInput">
+                            <img 
+                                src="/static/image/unknown.png"
+                                class="content-form-item-imageInput_icon"
+                            />
+                        </label>
+                    </div>
+                    <div class="content-form-item-inputWrapper">
+                        <input type="text" class="content-form-item_input" placeholder="이름">
+                    </div>
+                    <div class="content-form-item-inputWrapper">
+                        <input type="text" class="content-form-item_input" placeholder="나이">
+                    </div>
+                    <div class="content-form-item-inputWrapper">
+                        <div class="content-form-item-radioWrapper">
+                            <input class="content-form-item_radioInput" type="radio" name="cat_gender1">남아
+                            <input class="content-form-item_radioInput"type="radio" name="cat_gender1">여아
+                        </div>
+                    </div>
+                    <div class="content-form-item-inputWrapper">
+                        <div class="content-form-item-domainWrapper">
+                            <div class="content-form-item-domain_text">
+                                중성화 
+                            </div>
+                        </div>
+                        <div class="content-form-item-radioWrapper">
+                            <input class="content-form-item_radioInput" type="radio" name="cat_neutralization1">유
+                            <input class="content-form-item_radioInput"type="radio" name="cat_neutralization1">무
+                        </div>
+                    </div>
+                    <div class="content-form-item-textareaWrapper">
+                        <textarea class="content-form-item_textarea" cols="50" rows="50" name="cat_feature1" placeholder="성격 및 특징"></textarea>
+                    </div>
+                    <div class="content-form-item-textareaWrapper">
+                        <textarea class="content-form-item_textarea" cols="50" rows="50" name="cat_warning1" placeholder="주의사항"></textarea>
+                    </div>
+                </div>
+                <div class="content-form-itemWrapper">
+                    
+                </div>
+                <div class="content-form-itemWrapper">
+                    
+                </div>
+            </div>
+            <button class="content-form_button">등록하기</button>
+        </div>
+    </div>
+    <!-- content end -->
+</body>
+</html>

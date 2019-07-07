@@ -997,3 +997,12 @@ def modify_review(request, review_id, catsitter_id, time_rate, kindness_rate, ac
         result = { "result" : "anonymous_user" }
 
     return JsonResponse(result)
+
+def register_cat(request) :
+
+    return render(request, 'takmyo_app/register_cat.html')
+
+
+def base(request) :
+
+    return render(request, 'takmyo_app/base.html')

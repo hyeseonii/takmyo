@@ -28,6 +28,10 @@ urlpatterns = [
     path('show_catsitter/<int:catsitter_id>/', views.show_catsitter),
     path('show_catsitter/<int:catsitter_id>/register_review/<str:time_rate>/<str:kindness_rate>/<str:achievement_rate>/<str:review_comment>/', views.register_review),
 
+    path('register_cat/', views.register_cat),
+
+    path('base/',views.base),
+
 
 
 ]
